@@ -213,6 +213,10 @@ class MainWindow(QMainWindow):
         self.perm_btn.clicked.connect(self.install_udev)
         self.perm_btn.hide()
         lay.addWidget(self.perm_btn, 0, Qt.AlignHCenter)
+        self.resume_btn = QPushButton("Finish firmware update", objectName="Primary")
+        self.resume_btn.clicked.connect(self.resume_firmware_update)
+        self.resume_btn.hide()
+        lay.addWidget(self.resume_btn, 0, Qt.AlignHCenter)
         lay.addStretch()
         return w
 
@@ -269,10 +273,16 @@ class MainWindow(QMainWindow):
         self.find_btn.setText("Find Device")
         self.stage.setCurrentWidget(self.offline)
         perm = "Permission denied" in msg
+        boot = "bootloader" in msg
         self.perm_btn.setVisible(perm)
+        self.resume_btn.setVisible(boot)
         present = any(n.vid == 0x373F for n in list_nodes())
         self.offline_title.setText("NO ACCESS TO KEYBOARD" if perm else
+                                   "FIRMWARE UPDATE NOT FINISHED" if boot else
                                    "SEARCHING FOR DARK MOUNT…")
+        if boot:
+            msg = ("The keyboard is waiting in update mode. Press the button to finish "
+                   "installing the firmware.")
         self.offline_msg.setText(msg if (perm or present) else
                                  "Connect the keyboard via USB.")
         if not self.reconnect_timer.isActive():
@@ -307,6 +317,28 @@ class MainWindow(QMainWindow):
                 except (QLinkError, OSError) as e2:
                     e = e2
             QMessageBox.warning(self, "Dark Mount", f"Command failed:\n{e}")
+
+    # -- firmware ---------------------------------------------------------------------
+    def begin_firmware_update(self, pkg, installed: str):
+        from .firmware_dialog import FirmwareDialog
+        self.reconnect_timer.stop()
+        self.drop()  # release our session; the updater needs the device to itself
+        self.left.setEnabled(False)
+        dlg = FirmwareDialog(self, pkg, installed)
+        dlg.exec()
+        self.find_btn.setText("Find Device")
+        self.connect_device()
+        if not self.kb:
+            self.reconnect_timer.start()
+
+    def resume_firmware_update(self):
+        from .. import firmware as FW
+        cached = FW.cached_packages()
+        if not cached:
+            QMessageBox.warning(self, "Firmware", "No downloaded firmware found in "
+                                f"{FW.CACHE}.\nRun `darkmount firmware download` while online.")
+            return
+        self.begin_firmware_update(cached[0], "?")
 
     def install_udev(self):
         cmd = ("cat > /etc/udev/rules.d/70-bequiet-darkmount.rules <<'EOF'\n" + UDEV_RULE +

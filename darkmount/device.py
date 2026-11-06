@@ -236,7 +236,7 @@ class DarkMount:
         node = find_control_node()
         if node.pid == PID_DARK_MOUNT_BOOTLOADER:
             raise QLinkError("Keyboard is in bootloader (firmware update) mode. "
-                             "Use the official IO Center to finish the update.")
+                             "Run `darkmount firmware install` to finish the update.")
         self.dev = QLinkDevice(node, client_type=client_type, debug=debug)
 
     def __enter__(self):
@@ -248,7 +248,14 @@ class DarkMount:
         self.dev.close()
 
     def _req(self, feature, cmd, payload=b""):
-        return self.dev.request(feature, cmd, bytes(payload)).data
+        try:
+            return self.dev.request(feature, cmd, bytes(payload)).data
+        except QLinkError as e:
+            # Firmware >= 1.31 only accepts writes from the active session: ask for it
+            # (the darkmount service hands it over) and retry once.
+            if "NOT_ACTIVE" not in str(e) or not self.dev.ensure_active():
+                raise
+            return self.dev.request(feature, cmd, bytes(payload)).data
 
     # -- info --------------------------------------------------------------
     def qlink_version(self) -> str:

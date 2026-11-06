@@ -2,7 +2,7 @@
 
 Unofficial, **offline** Linux control for the **be quiet! Dark Mount** keyboard:
 lighting, key remapping (including the Fn layer and the numpad display keys),
-game mode, media dock settings and dock clock sync. There's a command-line tool,
+game mode, media dock settings, dock clock sync and **firmware updates**. There's a command-line tool,
 a background helper service and a desktop app, which you can also get as an
 AppImage.
 
@@ -14,8 +14,8 @@ an internet connection. This project talks to the keyboard directly over
 > of their respective owner and are used here only to say which hardware this
 > software supports. See [Notice](#notice).
 
-Tested on firmware 1.19.0 (main board, media dock and numpad), ANSI/US layout.
-Firmware updates are intentionally **not** supported; use the vendor's tools.
+Tested on firmware 1.19.0 and 1.31.0 (main board, media dock and numpad), ANSI/US
+layout, including a full 1.19.0 → 1.31.0 firmware update.
 
 ## Setup
 
@@ -36,7 +36,7 @@ The desktop app can also install this rule for you (it asks for your password).
 | Illumination | effect (Static, Color Wave, Tornado, Breathing, Reactive, Matrix), single/dual/spectrum colours, brightness, speed, direction. Animated live preview |
 | Key Binding | click a key on the rendered keyboard and assign a key or shortcut, media, mouse, lighting control, system shortcut, **Linux command**, open file/folder/website, or disable. Separate Fn layer |
 | Media Dock | menu colour, idle screen (image/clock), 12/24 h clock, screen-off timer, clock sync |
-| Product Settings | firmware versions, game mode and blocked keys, layout, helper service on/off |
+| Product Settings | firmware versions and updates, game mode and blocked keys, layout, helper service on/off |
 
 **AppImage** (bundled Python and Qt, ~60 MB):
 
@@ -73,6 +73,13 @@ darkmount gamemode block win,alt-tab,alt-f4
 
 darkmount dock set --clock 24 --menu-color dc4d00 --screensaver clock
 darkmount dock sync-time
+
+darkmount firmware status           # installed vs. downloaded firmware
+darkmount firmware download         # fetch the latest from the vendor's server (online)
+darkmount firmware install          # back up settings, update, restore settings
+darkmount firmware install --from DIR   # offline: folder with index.json + .bin files
+
+darkmount backup save | list | restore [FILE]
 ```
 
 `--debug` prints every raw 64-byte frame.
@@ -102,6 +109,28 @@ Image0 = "flatpak run org.gimp.GIMP"
 
 The numpad display keys are `Image0`–`Image7`, left to right, top row first.
 **Run Linux command** in the app sets up both the key binding and the config entry.
+
+## Firmware updates
+
+`darkmount firmware install` (or **Check for updates → Install** in the app) follows
+the vendor's update sequence: the keyboard reboots into its bootloader (USB PID
+`0009`), receives the images for the main board, media dock and numpad (32-byte
+chunks, ~3 minutes), validates and commits them, and reboots. Firmware is downloaded
+from the vendor's own update server (it is not included in this repository) and
+every image is checked against the SHA-512 in the vendor manifest before flashing.
+
+* Updates **reset the keyboard's settings to factory defaults**. The tool backs them
+  up first and restores them afterwards (`~/.local/share/darkmount/backups/`).
+* If an update is interrupted, the keyboard stays in its bootloader: it can't type,
+  but it isn't bricked. Run the install again (or press *Finish firmware update* in
+  the app) and it resumes where it stopped.
+* Use at your own risk. Don't unplug the keyboard or suspend the computer while it
+  updates.
+
+Firmware 1.31 only accepts changes from the oldest open session. The background
+service steps aside automatically whenever the app or CLI talks to the keyboard and
+reconnects ~5 s after they're done. Display-key Linux actions pause while the app is
+open.
 
 ## Protocol notes
 

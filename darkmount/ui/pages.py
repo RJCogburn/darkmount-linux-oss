@@ -9,7 +9,8 @@ from pathlib import Path
 
 from PySide6.QtCore import QSize, Qt, QTimer, Signal
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import (QButtonGroup, QCheckBox, QColorDialog, QComboBox, QFileDialog,
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QColorDialog, QComboBox,
+                               QFileDialog,
                                QFrame, QGridLayout, QHBoxLayout, QLabel, QLineEdit,
                                QListWidget, QMessageBox, QPlainTextEdit, QPushButton,
                                QScrollArea, QSlider, QSpinBox, QStackedWidget, QToolButton,
@@ -859,15 +860,28 @@ class SettingsPage(Page):
     def __init__(self, app):
         super().__init__("PRODUCT SETTINGS")
         self.app = app
-        self.body.addWidget(label("FIRMWARE VERSION"))
+        fh = QHBoxLayout()
+        fh.addWidget(label("FIRMWARE VERSION"))
+        fh.addStretch()
+        self.check_btn = QPushButton("Check for updates", objectName="Primary")
+        self.check_btn.clicked.connect(self.check_updates)
+        fh.addWidget(self.check_btn)
+        self.body.addLayout(fh)
         self.fw = QVBoxLayout()
         self.fw.setSpacing(4)
         self.body.addLayout(self.fw)
-        fw_note = label("Firmware updates aren't supported on Linux. Use the official IO "
-                        "Center on Windows.", "Muted")
-        fw_note.setWordWrap(True)
-        self.body.addWidget(fw_note)
+        ur = QHBoxLayout()
+        self.update_lbl = label("", "Muted")
+        self.update_lbl.setWordWrap(True)
+        ur.addWidget(self.update_lbl, 1)
+        self.install_btn = QPushButton("Install", objectName="Primary")
+        self.install_btn.clicked.connect(self.install_update)
+        self.install_btn.hide()
+        ur.addWidget(self.install_btn)
+        self.body.addLayout(ur)
         self.body.addSpacing(8)
+        self.installed = "0.0.0"
+        self.modules_ok = False
 
         gm = QHBoxLayout()
         gm.addLayout(info_label("GAME MODE", "Also toggled on the keyboard with Fn + Pause."))
@@ -919,9 +933,13 @@ class SettingsPage(Page):
                 if it.widget():
                     it.widget().deleteLater()
             names = {"Main": "Keyboard", "MediaDock": "Media Dock", "Numpad": "Numpad"}
-            for n, v in kb.device_info()["firmware"]:
+            fw = kb.device_info()["firmware"]
+            for n, v in fw:
                 w = QLabel(f"{names.get(n, n)}<br><span style='color:{N300}'>v {v}</span>")
                 self.fw.addWidget(w)
+            self.installed = fw[0][1] if fw else "0.0.0"
+            self.modules_ok = kb.numpad_state()[0] and kb.media_dock_state()[0]
+            self._show_available()
             self.game.setChecked(kb.game_mode())
             flags = kb.game_mode_flags()
             for t, f in self.flags:
@@ -932,6 +950,45 @@ class SettingsPage(Page):
             self._service_status()
         finally:
             self.loading = False
+
+    # -- firmware ------------------------------------------------------------------------
+    def _show_available(self):
+        from .. import firmware as FW
+        cached = FW.cached_packages()
+        pkg = cached[0] if cached else None
+        self.pkg = pkg
+        if pkg and FW._ver(pkg.version) > FW._ver(self.installed):
+            self.update_lbl.setText(f"Firmware <b style='color:{ACCENT}'>{pkg.version}</b> is "
+                                    "ready to install." + ("" if self.modules_ok else
+                                    "<br>Attach the numpad and media dock first."))
+            self.install_btn.setVisible(True)
+            self.install_btn.setEnabled(self.modules_ok)
+        elif pkg:
+            self.update_lbl.setText(f"Up to date (latest downloaded: {pkg.version}).")
+            self.install_btn.hide()
+        else:
+            self.update_lbl.setText("Press “Check for updates” to download the latest "
+                                    "firmware (needs internet once).")
+            self.install_btn.hide()
+
+    def check_updates(self):
+        from .. import firmware as FW
+        self.check_btn.setEnabled(False)
+        self.update_lbl.setText("Checking…")
+        QApplication.processEvents()
+        try:
+            FW.download_latest(progress=lambda m: (self.update_lbl.setText(m),
+                                                   QApplication.processEvents()))
+        except Exception as e:  # network / server errors
+            QMessageBox.warning(self, "Check for updates", f"Couldn't download firmware:\n{e}")
+        finally:
+            self.check_btn.setEnabled(True)
+        self._show_available()
+
+    def install_update(self):
+        if not self.pkg:
+            return
+        self.app.begin_firmware_update(self.pkg, self.installed)
 
     def _game(self, on):
         if not self.loading:

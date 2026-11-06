@@ -255,6 +255,126 @@ def cmd_keys(kb: DarkMount, args):
     return 0
 
 
+def cmd_backup(args):
+    import json
+    from pathlib import Path
+    from . import backup
+    if args.action == "list":
+        files = sorted(backup.BACKUPS.glob("*.json")) if backup.BACKUPS.exists() else []
+        for f in files:
+            print(f)
+        if not files:
+            print("no backups yet")
+        return 0
+    if args.action == "save":
+        with DarkMount() as kb:
+            p = backup.save(backup.snapshot(kb))
+        print("saved", p)
+        return 0
+    snap = json.loads(Path(args.file).read_text()) if args.file else backup.latest()
+    if not snap:
+        raise SystemExit("no backup found")
+    with DarkMount() as kb:
+        backup.restore(kb, snap)
+    return 0
+
+
+def cmd_firmware(args):
+    """Firmware status / download / install. Runs without a pre-opened session."""
+    from . import firmware as FW
+
+    def current_versions():
+        node = FW._find(FW.PID_NORMAL)
+        if node is None:
+            return None, bool(FW._find(FW.PID_BOOTLOADER))
+        with DarkMount() as kb:
+            info = kb.device_info()
+            np_ok = kb.numpad_state()[0]
+            md_ok = kb.media_dock_state()[0]
+        return {"fw": info["firmware"], "numpad": np_ok, "dock": md_ok}, False
+
+    if args.action == "download":
+        pkg = FW.download_latest()
+        print(f"Firmware {pkg.version} downloaded and verified: {pkg.folder}")
+        return 0
+
+    pkg = None
+    if args.from_dir:
+        pkg = FW.load_package(args.from_dir)
+    else:
+        cached = FW.cached_packages()
+        pkg = cached[0] if cached else None
+
+    cur, in_bootloader = current_versions()
+    if args.action == "status":
+        if in_bootloader:
+            print("Keyboard is in BOOTLOADER mode (an update was interrupted).")
+            print("Run `darkmount firmware install` to finish it.")
+        elif cur:
+            for name, ver in cur["fw"]:
+                print(f"Installed  {name:10s} {ver}")
+            print(f"Numpad: {'connected' if cur['numpad'] else 'not connected'}   "
+                  f"Media dock: {'connected' if cur['dock'] else 'not connected'}")
+        else:
+            print("Keyboard not found.")
+        if pkg:
+            print(f"Available  {pkg.version}  ({pkg.folder})")
+            for n in pkg.notes or []:
+                print(f"  - {n}")
+        else:
+            print("No firmware downloaded yet: `darkmount firmware download` (needs internet).")
+        return 0
+
+    # install
+    if pkg is None:
+        raise SystemExit("no firmware available: run `darkmount firmware download` or pass --from DIR")
+    mcus = [0, 1, 2]
+    if cur and not in_bootloader:
+        if not (cur["numpad"] and cur["dock"]):
+            raise SystemExit("Attach both the numpad and the media dock before updating "
+                             "(all three parts are updated together).")
+        installed = cur["fw"][0][1]
+        print(f"Installed firmware: {installed}   ->   new firmware: {pkg.version}")
+        if FW._ver(pkg.version) <= FW._ver(installed) and not args.force:
+            print("Already up to date (use --force to reinstall).")
+            return 0
+    print("\n  Do NOT unplug the keyboard or put the computer to sleep during the update.")
+    print("  The keyboard will restart into update mode and back; typing won't work meanwhile.\n")
+    if not args.yes:
+        try:
+            if input("Type 'update' to start: ").strip().lower() != "update":
+                print("Cancelled.")
+                return 1
+        except EOFError:
+            print("Cancelled (no input).")
+            return 1
+
+    last = {"stage": None}
+
+    def report(stage, pct, msg):
+        if stage == "transfer" and msg and "/" in msg and last["stage"] == "transfer":
+            print(f"\r  {pct:5.1f}%  {msg:60s}", end="", flush=True)
+        else:
+            if last["stage"] == "transfer":
+                print()
+            print(f"[{stage}] {msg}", flush=True)
+        last["stage"] = stage
+
+    try:
+        FW.update_with_backup(pkg, report, restore_settings=not args.no_restore,
+                              debug=args.debug)
+    except (FW.FirmwareError, QLinkError, OSError) as e:
+        print(f"\nUPDATE FAILED: {e}", file=sys.stderr)
+        print("If the keyboard stays in update mode, run `darkmount firmware install` again "
+              "to resume.", file=sys.stderr)
+        return 2
+    print("\nDone. New versions:")
+    cur, _ = current_versions()
+    for name, ver in (cur or {}).get("fw", []):
+        print(f"  {name:10s} {ver}")
+    return 0
+
+
 def cmd_daemon(args):
     """Background service.
 
@@ -287,10 +407,27 @@ def cmd_daemon(args):
                 cfg_mtime = CONFIG_PATH.stat().st_mtime if CONFIG_PATH.exists() else 0
                 last_sync = 0.0
                 last_tick = time.time()
+                yielded = False
                 while True:
                     now = time.time()
                     jumped = abs(now - last_tick) > 30  # suspend/resume or clock change
                     last_tick = now
+                    # Firmware >= 1.31 lets only the oldest session write. When another
+                    # client (GUI/CLI) talks to the keyboard, step aside; come back once
+                    # it has been quiet for a few seconds.
+                    quiet = time.monotonic() - kb.dev.foreign_seen
+                    if not yielded and quiet < 2:
+                        kb.dev.close_session()
+                        yielded = True
+                        print("another client is active; pausing", flush=True)
+                    elif yielded and quiet > 5:
+                        kb.dev.open_session()
+                        yielded = False
+                        last_sync = 0.0
+                        print("resumed", flush=True)
+                    if yielded:
+                        kb.dev.next_notification(1.0)  # keep watching the traffic
+                        continue
                     if jumped or now - last_sync >= args.interval:
                         if kb.media_dock_state()[0]:
                             t = kb.sync_media_dock_time()
@@ -364,6 +501,19 @@ def build_parser():
     g.add_argument("--open-url", metavar="URL", help="opened by `darkmount daemon`")
     g.add_argument("--disable", action="store_true", help="make the key do nothing")
 
+    s = sub.add_parser("firmware", help="firmware status, download and update")
+    s.add_argument("action", choices=["status", "download", "install"])
+    s.add_argument("--from", dest="from_dir", metavar="DIR",
+                   help="use firmware from DIR (index.json + .bin files) instead of the cache")
+    s.add_argument("--yes", action="store_true", help="don't ask for confirmation")
+    s.add_argument("--force", action="store_true", help="reinstall even if not newer")
+    s.add_argument("--no-restore", action="store_true",
+                   help="don't restore your settings afterwards (updates reset them)")
+
+    s = sub.add_parser("backup", help="save / restore on-keyboard settings")
+    s.add_argument("action", choices=["save", "restore", "list"])
+    s.add_argument("file", nargs="?", help="(restore) backup file; default: the latest")
+
     s = sub.add_parser("daemon", help="background service: dock clock + key actions")
     s.add_argument("--interval", type=int, default=300, help="seconds (default 300)")
     return p
@@ -378,6 +528,10 @@ def main(argv=None):
     try:
         if args.cmd == "daemon":
             return cmd_daemon(args)
+        if args.cmd == "firmware":
+            return cmd_firmware(args)
+        if args.cmd == "backup":
+            return cmd_backup(args)
         with DarkMount(debug=args.debug) as kb:
             return {"info": cmd_info, "light": cmd_light, "gamemode": cmd_gamemode,
                     "dock": cmd_dock, "keys": cmd_keys}[args.cmd](kb, args)

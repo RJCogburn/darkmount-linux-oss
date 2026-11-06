@@ -75,6 +75,15 @@ class RootCmd(IntEnum):
     GetSupportedFeatures = 4
     GetQLinkVersion = 5
     GetActiveSessionInfo = 6
+    RequestStateChange = 7
+    SendStateChangeDecision = 8
+
+
+class RootNotify(IntEnum):
+    SessionStateChanged = 1
+    ActiveSessionChanged = 2
+    StateChangeRequested = 3
+    StateChangeDecision = 4
 
 
 class ClientType(IntEnum):
@@ -157,22 +166,29 @@ class Response:
 
 def build_frames(session: int, request_id: int, feature: int, command: int,
                  payload: bytes = b"") -> list[bytes]:
-    """Build one or more 64-byte frames for a request."""
+    """Build one or more 64-byte frames for a request.
+
+    Mirrors the official app byte for byte, including how it computes the
+    "more frames" flag: the expected frame count is ceil(len / 55) even though
+    continuation frames carry 59 bytes, so for some large payloads the last
+    frame still has bit 7 set. The firmware is tested against that behaviour.
+    """
     first_max = PACKET_SIZE - 9
     if len(payload) <= first_max:
         chunks = [payload]
+        total = 1
     else:
         chunks = [payload[:first_max]]
         rest = payload[first_max:]
         while rest:
             chunks.append(rest[:first_max + 4])
             rest = rest[first_max + 4:]
-    total = len(chunks)
+        total = -(-len(payload) // first_max)  # what the official app uses
     frames = []
     for idx, chunk in enumerate(chunks):
         p = bytearray(PACKET_SIZE)
         p[0] = (len(chunk) + 6) & 0xFF
-        p[1] = (idx | ((0 if idx == total - 1 else 1) << 7)) if total > 1 else 0
+        p[1] = (idx | ((0 if total - 1 == idx else 1) << 7)) if total > 1 else 0
         p[2] = session
         if idx == 0:
             p[3] = Status.SUCCESS
@@ -279,6 +295,7 @@ class QLinkDevice:
         self._keepalive_stop = threading.Event()
         self._keepalive_thread: threading.Thread | None = None
         self.notifications: list[Frame] = []
+        self.foreign_seen = 0.0  # last time we saw traffic for another session
 
     # -- low level -------------------------------------------------------
     def open(self):
@@ -326,7 +343,10 @@ class QLinkDevice:
         raw = raw[:PACKET_SIZE].ljust(PACKET_SIZE, b"\x00")
         if self.debug:
             print("<<", raw.hex(" "))
-        return Frame(raw)
+        f = Frame(raw)
+        if not f.is_notification and f.session_id != self.session.session_id:
+            self.foreign_seen = time.monotonic()  # a reply to another client's request
+        return f
 
     def request(self, feature: int, command: int, payload: bytes = b"",
                 timeout: float = 1.0, session: int | None = None) -> Response:
@@ -344,7 +364,8 @@ class QLinkDevice:
                 resp = self._read(remaining)
                 if resp is None:
                     continue
-                if resp.is_notification and not (resp.feature == feature and resp.command == command):
+                if resp.is_notification:
+                    # never a reply (notifications can share feature+command ids)
                     self.notifications.append(resp)
                     continue
                 if resp.feature == feature and resp.command == command:
@@ -382,11 +403,11 @@ class QLinkDevice:
                 return None
             with self._lock:
                 f = self._read(min(0.2, remaining))
-            if f is not None and f.feature != Feature.ROOT:
+            if f is not None and f.is_notification:  # skip stray replies
                 return f
 
     # -- session ---------------------------------------------------------
-    def open_session(self) -> Session:
+    def open_session(self, keepalive: bool = True) -> Session:
         nonce = random.randint(10000, 99999)
         payload = struct.pack("<I", nonce) + bytes([self.client_type])
         resp = self.request(Feature.ROOT, RootCmd.OpenSession, payload, session=0)
@@ -399,9 +420,37 @@ class QLinkDevice:
         )
         if not 0 < self.session.session_id < 255:
             raise QLinkError(f"Device refused session (id={self.session.session_id})")
-        if self.session.timeout:
+        if self.session.timeout and keepalive:
             self.start_keepalive(self.session.timeout)
         return self.session
+
+    def close_session(self):
+        self.stop_keepalive()
+        if self.session.session_id:
+            try:
+                self.request(Feature.ROOT, RootCmd.CloseSession,
+                             bytes([self.session.session_id]))
+            except QLinkError:
+                pass
+        self.session = Session()
+
+    def ensure_active(self, timeout: float = 4.0) -> bool:
+        """Become the keyboard's active session (needed for writes on firmware >= 1.31).
+
+        Only the oldest open session may write. Other darkmount processes (the
+        background service) step aside when they see our traffic, so we re-open our
+        session until it comes up active.
+        """
+        if self.session.state == 1:
+            return True
+        end = time.monotonic() + timeout
+        while time.monotonic() < end:
+            self.close_session()
+            time.sleep(0.4)
+            self.open_session()
+            if self.session.state == 1:
+                return True
+        return False
 
     def start_keepalive(self, timeout_s: int):
         self.stop_keepalive()
