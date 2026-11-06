@@ -1,0 +1,106 @@
+{
+  "folders": [
+    { "path": ".", "name": "darkmount-linux" }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "python.analysis.extraPaths": ["${workspaceFolder}"],
+    "files.exclude": {
+      "**/__pycache__": true,
+      "*.egg-info": true,
+      "build": true
+    },
+    "search.exclude": {
+      "build": true,
+      "dist": true,
+      "darkmount/assets": true
+    },
+    "files.watcherExclude": {
+      "**/build/**": true,
+      "**/dist/**": true
+    },
+    "editor.rulers": [100],
+    "[python]": {
+      "editor.tabSize": 4
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.debugpy",
+      "charliermarsh.ruff"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Run: desktop app",
+        "type": "shell",
+        "command": "/usr/bin/python3 -m darkmount.ui",
+        "options": { "cwd": "${workspaceFolder}" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Run: CLI info",
+        "type": "shell",
+        "command": "/usr/bin/python3 -m darkmount info --features",
+        "options": { "cwd": "${workspaceFolder}" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Run: list key bindings",
+        "type": "shell",
+        "command": "/usr/bin/python3 -m darkmount keys list",
+        "options": { "cwd": "${workspaceFolder}" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Build: AppImage",
+        "type": "shell",
+        "command": "packaging/build-appimage.sh",
+        "options": { "cwd": "${workspaceFolder}" },
+        "group": { "kind": "build", "isDefault": true },
+        "problemMatcher": []
+      },
+      {
+        "label": "Install: AppImage to ~/Applications",
+        "type": "shell",
+        "command": "install -m755 dist/darkmount-linux-x86_64.AppImage ~/Applications/",
+        "options": { "cwd": "${workspaceFolder}" },
+        "dependsOn": "Build: AppImage",
+        "problemMatcher": []
+      },
+      {
+        "label": "Service: restart + show log",
+        "type": "shell",
+        "command": "systemctl --user restart darkmount-clock.service && sleep 2 && journalctl --user -u darkmount-clock.service -n 20 --no-pager -o cat",
+        "problemMatcher": []
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug: desktop app",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "darkmount.ui",
+        "python": "/usr/bin/python3",
+        "cwd": "${workspaceFolder}",
+        "justMyCode": true
+      },
+      {
+        "name": "Debug: CLI (info --debug)",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "darkmount",
+        "args": ["--debug", "info"],
+        "python": "/usr/bin/python3",
+        "cwd": "${workspaceFolder}"
+      }
+    ]
+  }
+}

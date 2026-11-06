@@ -1,0 +1,3410 @@
+{
+    "Default": {
+        "layoutImages": {
+            "US": "qrc:/manifests/dark_mount/images/default/main_us.webp"
+        },
+        "keys": [
+            {
+                "id": "Key_Tab",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 352,
+                    "width": 51,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Q",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 148,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 126,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_GraveAccentAndTilde",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 169,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 213,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 256,
+                    "y": 311,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 300,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 343,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 386,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_EqualsAndPlus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 603,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_MinusAndUnderscore",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 560,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 516,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 473,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 429,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_A",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 158,
+                    "y": 395,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Z",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 181,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_X",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 224,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_C",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 268,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_V",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 310,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_B",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 354,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_N",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 397,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_M",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 441,
+                    "y": 437,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_SlashAndQuestionMark",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 571,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PeriodAndBiggerThan",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 528,
+                    "y": 437,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_CommaAndLessThan",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 484,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_CapsLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 395,
+                    "width": 62,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_S",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 202,
+                    "y": 395,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_D",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 245,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 289,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_G",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 332,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_H",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 376,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_J",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 419,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_K",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 462,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_L",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 505,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Enter",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 635,
+                    "y": 394,
+                    "width": 84,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightShift",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 614,
+                    "y": 437,
+                    "width": 105,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftShift",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 83,
+                    "y": 438,
+                    "width": 83,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_W",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 192,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_E",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 234,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_R",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 278,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_T",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 321,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Y",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 365,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_U",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 408,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_I",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 452,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_O",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 495,
+                    "y": 351,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_P",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 539,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_BracketRight",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 625,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Backslash",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 668,
+                    "y": 351,
+                    "width": 50,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_BracketLeft",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 581,
+                    "y": 351,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_SemicolonAndColon",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 549,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ApostropheAndDoubleQuote",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 592,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Backspace",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 647,
+                    "y": 309,
+                    "width": 72,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Escape",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 258,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 170,
+                    "y": 258,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 213,
+                    "y": 258,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 257,
+                    "y": 258,
+                    "width": 28,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 300,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 365,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 408,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 452,
+                    "y": 257,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 495,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 560,
+                    "y": 257,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 603,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 646,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F12",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 690,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PrintScreen",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 742,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ScrollLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PauseBreak",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 829,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PageUp",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 829,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PageDown",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 830,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Home",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Insert",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 742,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Delete",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 743,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_End",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_UpArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_DownArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 480,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 830,
+                    "y": 480,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 743,
+                    "y": 480,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftCtrl",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 481,
+                    "width": 41,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftGui",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 137,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftAlt",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 192,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Fn",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 625,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightGui",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 571,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightAlt",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 516,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Space",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 245,
+                    "y": 481,
+                    "width": 257,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightCtrl",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 679,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            }
+        ],
+        "ledMasks": [
+            {
+                "id": "Led_KeyboardLeft1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_01.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 174,
+                        "width": 58,
+                        "height": 102
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_02.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 185,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_03.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 213,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_04.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 241,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_05.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 269,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_06.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 297,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_07.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 325,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_08.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 353,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_09.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 381,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_10.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 409,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/L_11.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 437,
+                        "width": 58,
+                        "height": 107
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_01.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 174,
+                        "width": 58,
+                        "height": 102
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_02.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 185,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_03.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 213,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_04.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 241,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_05.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 269,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_06.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 297,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_07.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 325,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_08.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 353,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_09.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 381,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_10.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 409,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardRight11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/R_11.webp",
+                    "rect": {
+                        "x": 883,
+                        "y": 437,
+                        "width": 58,
+                        "height": 107
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_01.webp",
+                    "rect": {
+                        "x": 45,
+                        "y": 127,
+                        "width": 107,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_02.webp",
+                    "rect": {
+                        "x": 71,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_03.webp",
+                    "rect": {
+                        "x": 109,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_04.webp",
+                    "rect": {
+                        "x": 147,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_05.webp",
+                    "rect": {
+                        "x": 185,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_06.webp",
+                    "rect": {
+                        "x": 223,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_07.webp",
+                    "rect": {
+                        "x": 261,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_08.webp",
+                    "rect": {
+                        "x": 299,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_09.webp",
+                    "rect": {
+                        "x": 337,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_10.webp",
+                    "rect": {
+                        "x": 375,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_11.webp",
+                    "rect": {
+                        "x": 413,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop12",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_12.webp",
+                    "rect": {
+                        "x": 451,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop13",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_13.webp",
+                    "rect": {
+                        "x": 489,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop14",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_14.webp",
+                    "rect": {
+                        "x": 527,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop15",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_15.webp",
+                    "rect": {
+                        "x": 565,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop16",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_16.webp",
+                    "rect": {
+                        "x": 603,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop17",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_17.webp",
+                    "rect": {
+                        "x": 641,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop18",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_18.webp",
+                    "rect": {
+                        "x": 679,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop19",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_19.webp",
+                    "rect": {
+                        "x": 717,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop20",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_20.webp",
+                    "rect": {
+                        "x": 755,
+                        "y": 127,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardTop21",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/T_21.webp",
+                    "rect": {
+                        "x": 793,
+                        "y": 127,
+                        "width": 102,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_01.webp",
+                    "rect": {
+                        "x": 45,
+                        "y": 531,
+                        "width": 107,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_02.webp",
+                    "rect": {
+                        "x": 71,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_03.webp",
+                    "rect": {
+                        "x": 109,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_04.webp",
+                    "rect": {
+                        "x": 147,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_05.webp",
+                    "rect": {
+                        "x": 185,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_06.webp",
+                    "rect": {
+                        "x": 223,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_07.webp",
+                    "rect": {
+                        "x": 261,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_08.webp",
+                    "rect": {
+                        "x": 299,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_09.webp",
+                    "rect": {
+                        "x": 337,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_10.webp",
+                    "rect": {
+                        "x": 375,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_11.webp",
+                    "rect": {
+                        "x": 413,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom12",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_12.webp",
+                    "rect": {
+                        "x": 451,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom13",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_13.webp",
+                    "rect": {
+                        "x": 489,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom14",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_14.webp",
+                    "rect": {
+                        "x": 527,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom15",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_15.webp",
+                    "rect": {
+                        "x": 565,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom16",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_16.webp",
+                    "rect": {
+                        "x": 603,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom17",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_17.webp",
+                    "rect": {
+                        "x": 641,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom18",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_18.webp",
+                    "rect": {
+                        "x": 679,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom19",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_19.webp",
+                    "rect": {
+                        "x": 717,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom20",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_20.webp",
+                    "rect": {
+                        "x": 755,
+                        "y": 531,
+                        "width": 119,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom21",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/B_21.webp",
+                    "rect": {
+                        "x": 793,
+                        "y": 531,
+                        "width": 102,
+                        "height": 58
+                    }
+                }
+            }
+        ]
+    },
+    "CustomLightings": {
+        "layoutImages": {
+            "US": "qrc:/manifests/dark_mount/images/default/main_us.webp"
+        },
+        "keys": [
+            {
+                "id": "Key_Tab",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 352,
+                    "width": 51,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Q",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 147,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 126,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_GraveAccentAndTilde",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 169,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 213,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 256,
+                    "y": 311,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 299,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 342,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 386,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_EqualsAndPlus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 603,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_MinusAndUnderscore",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 560,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 516,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 473,
+                    "y": 309,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 429,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_A",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 158,
+                    "y": 395,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Z",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 181,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_X",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 223,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_C",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 267,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_V",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 310,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_B",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 354,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_N",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 397,
+                    "y": 438,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_M",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 441,
+                    "y": 437,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_SlashAndQuestionMark",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 570,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PeriodAndBiggerThan",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 528,
+                    "y": 437,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_CommaAndLessThan",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 484,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_CapsLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 395,
+                    "width": 62,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_S",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 202,
+                    "y": 395,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_D",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 245,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 289,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_G",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 332,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_H",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 375,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_J",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 418,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_K",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 462,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_L",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 505,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Enter",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 635,
+                    "y": 394,
+                    "width": 84,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightShift",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 613,
+                    "y": 437,
+                    "width": 105,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftShift",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 83,
+                    "y": 438,
+                    "width": 83,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_W",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 191,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_E",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 234,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_R",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 278,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_T",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 321,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Y",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 365,
+                    "y": 352,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_U",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 408,
+                    "y": 352,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_I",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 452,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_O",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 494,
+                    "y": 351,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_P",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 538,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_BracketRight",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 625,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Backslash",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 668,
+                    "y": 351,
+                    "width": 50,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_BracketLeft",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 581,
+                    "y": 351,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_SemicolonAndColon",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 549,
+                    "y": 394,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ApostropheAndDoubleQuote",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 592,
+                    "y": 394,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Backspace",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 646,
+                    "y": 309,
+                    "width": 72,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Escape",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 258,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 170,
+                    "y": 258,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 213,
+                    "y": 258,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 257,
+                    "y": 258,
+                    "width": 28,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 299,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 365,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 408,
+                    "y": 258,
+                    "width": 29,
+                    "height": 30,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 452,
+                    "y": 257,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 494,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 560,
+                    "y": 257,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 603,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 646,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_F12",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 689,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PrintScreen",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 742,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ScrollLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PauseBreak",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 829,
+                    "y": 257,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PageUp",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 829,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PageDown",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 830,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Home",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Insert",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 742,
+                    "y": 309,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Delete",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 743,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_End",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 351,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_UpArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 437,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_DownArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 786,
+                    "y": 480,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 830,
+                    "y": 480,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftArrow",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 743,
+                    "y": 480,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftCtrl",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 82,
+                    "y": 481,
+                    "width": 41,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftGui",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 137,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_LeftAlt",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 191,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Fn",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 625,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightGui",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 570,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightAlt",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 516,
+                    "y": 481,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Space",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 245,
+                    "y": 481,
+                    "width": 257,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_RightCtrl",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 679,
+                    "y": 480,
+                    "width": 40,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 61,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 100,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 140,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 179,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 218,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 257,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 297,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 336,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 375,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 415,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 454,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop12",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 493,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop13",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 532,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop14",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 572,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop15",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 611,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop16",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 650,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop17",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 690,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop18",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 729,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop19",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 768,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop20",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 807,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardTop21",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 847,
+                    "y": 169,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 61,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 100,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 140,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 179,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 218,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 257,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 297,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 336,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 375,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 415,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 454,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom12",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 493,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom13",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 532,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom14",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 572,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom15",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 611,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom16",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 650,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom17",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 690,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom18",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 729,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom19",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 768,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom20",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 807,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardBottom21",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 847,
+                    "y": 540,
+                    "width": 33,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 185,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 217,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 249,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 281,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 313,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 345,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 377,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 409,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 441,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 473,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardLeft11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 505,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 185,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 217,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 249,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 281,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 313,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 345,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 377,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 409,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 441,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 473,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_KeyboardRight11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 891,
+                    "y": 505,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            }
+        ]
+    },
+    "MediaDock": {
+        "layoutImages": {
+            "US": "qrc:/manifests/dark_mount/images/media_dock/media.webp"
+        },
+        "keys": []
+    }
+}

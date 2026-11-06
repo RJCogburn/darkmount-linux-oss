@@ -1,0 +1,4 @@
+#!/bin/sh
+# Launch the Dark Mount GUI with the system Python (which provides PySide6).
+DIR="${DARKMOUNT_DIR:-$(cd "$(dirname "$(readlink -f "$0")")/.." 2>/dev/null && pwd)}"
+PYTHONPATH="$DIR${PYTHONPATH:+:$PYTHONPATH}" exec /usr/bin/python3 -m darkmount.gui "$@"

@@ -1,0 +1,188 @@
+{
+    "Default": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/default/media_left.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/default/media_right.webp"
+            }
+        },
+        "positions": {
+            "Left": {
+                "mimicGeometryOffset": {
+                    "x": 100,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 100,
+                    "y": 0
+                }
+            },
+            "Right": {
+                "mimicGeometryOffset": {
+                    "x": 568,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 568,
+                    "y": 0
+                }
+            }
+        },
+        "keys": []
+    },
+    "KeyBinding": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/key_binding/media_left_en.webp",
+                "De": "qrc:/manifests/dark_mount/images/key_binding/media_left_de.webp",
+                "Fr": "qrc:/manifests/dark_mount/images/key_binding/media_left_fr.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/key_binding/media_right_en.webp",
+                "De": "qrc:/manifests/dark_mount/images/key_binding/media_right_de.webp",
+                "Fr": "qrc:/manifests/dark_mount/images/key_binding/media_right_fr.webp"
+            }
+        },
+        "positions": {
+            "Left": {
+                "mimicGeometryOffset": {
+                    "x": 100,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 100,
+                    "y": 0
+                }
+            },
+            "Right": {
+                "mimicGeometryOffset": {
+                    "x": 350,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 350,
+                    "y": 0
+                }
+            }
+        },
+        "keys": [
+            {
+                "id": "Key_Mute",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 13,
+                    "y": 26,
+                    "width": 32,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ScanPreviousTrack",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 13,
+                    "y": 71,
+                    "width": 32,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_PlayPause",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 250,
+                    "y": 26,
+                    "width": 32,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_ScanNextTrack",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 250,
+                    "y": 71,
+                    "width": 32,
+                    "height": 32,
+                    "rx": 3
+                }
+            }
+        ]
+    },
+    "CustomLightings": {},
+    "MediaDock": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/media_dock/media.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/media_dock/media.webp"
+            }
+        },
+        "keys": [
+            {
+                "id": "Key_Mute",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 876,
+                    "y": 1088,
+                    "width": 396,
+                    "height": 160,
+                    "rx": 9
+                }
+            },
+            {
+                "id": "Key_ScanPreviousTrack",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 876,
+                    "y": 1792,
+                    "width": 396,
+                    "height": 160,
+                    "rx": 9
+                }
+            },
+            {
+                "id": "Key_PlayPause",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 1276,
+                    "y": 1088,
+                    "width": 396,
+                    "height": 160,
+                    "rx": 9
+                }
+            },
+            {
+                "id": "Key_ScanNextTrack",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 1276,
+                    "y": 1792,
+                    "width": 396,
+                    "height": 160,
+                    "rx": 9
+                }
+            }
+        ],
+        "ledMasks": [
+            {
+                "id": "Led_MediaDockMenu",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/media_dock/masks/led-menu.svg",
+                    "rect": {
+                        "x": 2083,
+                        "y": 1173,
+                        "width": 316,
+                        "height": 347
+                    }
+                }
+            }
+        ]
+    }
+}

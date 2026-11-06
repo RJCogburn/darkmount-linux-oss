@@ -1,0 +1,11 @@
+[Unit]
+Description=be quiet! Dark Mount helper (dock clock sync, key actions)
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/darkmount daemon --interval 600
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

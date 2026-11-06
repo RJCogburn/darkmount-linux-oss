@@ -1,0 +1,119 @@
+{
+    "id": {
+        "type": "usb",
+        "vid": 14143,
+        "pid": 1
+    },
+    "Enumeration": {
+        "flags": [
+            "SimpleDevice"
+        ]
+    },
+    "Hid": {
+        "usage": 1
+    },
+    "DeviceInfo": {
+        "deviceType": "Keyboard",
+        "modelName": "Dark Mount",
+        "homeScreenIcon": "qrc:/manifests/dark_mount/images/view.webp",
+        "deviceSelectorIcon": "qrc:/manifests/dark_mount/images/device_selector.webp",
+        "supportedSubscreens": [
+            "Illumination",
+            "KeyBindings",
+            "MediaDock",
+            "ProductSettings"
+        ],
+        "minimumSupportedFw": "1.13.0"
+    },
+    "OnDeviceLightings": {
+        "availableGeneralEffects": [
+            "Static",
+            "ColorWave",
+            "Tornado",
+            "Breathing",
+            "Reactive",
+            "Matrix"
+        ],
+        "availableCustomEffects": [
+            "Static",
+            "ColorWave",
+            "Tornado",
+            "Breathing",
+            "Reactive",
+            "Matrix"
+        ],
+        "frameParameters": {
+            "columnWidth": 43
+        },
+        "mapping": ":/manifests/dark_mount/dark_mount_leds_mapping.json",
+        "defaultEffect": "Static",
+        "mainColor": "#ff2800",
+        "groups": {
+            "All": {
+                "hintType": "All",
+                "zones": {
+                    "AllZones": [0]
+                }
+            }
+        }
+    },
+    "DeviceLayout": {
+        "main": {
+             "ANSI": ":/manifests/dark_mount/dark_mount_main_ansi.json",
+             "ISO": ":/manifests/dark_mount/dark_mount_main_iso.json"
+        },
+        "modules": {
+            "Numpad": ":/manifests/dark_mount/dark_mount_numpad.json",
+            "Media": ":/manifests/dark_mount/dark_mount_media.json"
+        }
+    },
+    "KeyBinding": {
+        "availableBindingLayers" : [
+            "Common",
+            "Fn1"
+        ],
+        "blockedKeysFnLayer": [
+            "Key_R",
+            "Key_PauseBreak"
+        ],
+        "mapping": ":/manifests/dark_mount/dark_mount_keys_mapping.json"
+    },
+    "Macros": {
+        "supportedInputDevices" : [
+            "Keyboard",
+            "Mouse"
+        ],
+        "maxMacrosCount": 15,
+        "maxEventsCount": 200
+    },
+    "FwUpdate": {
+        "productName": "dark_mount",
+        "packageName": "KEYBOARD",
+        "bootloaderDeviceId": {
+            "vid": 14143,
+            "pid": 9
+        },
+        "mcuOrder": [
+            "Main",
+            "MediaModule",
+            "NumpadModule"
+        ]
+    },
+    "FactoryReset": {},
+    "PollingRate": {
+        "pollingRates": [
+            1000
+        ]
+    },
+    "Keyboard": {
+        "availableGameModeFlags" : [
+            "DisabledShiftTab",
+            "DisabledAltF4",
+            "DisabledWindowsKey",
+            "DisabledAltTab",
+            "DisabledCapsLockKey"
+        ],
+        "combination" : "FnPause",
+        "disabledCapsLockKeyMinFw": "1.23.0"
+    }
+}

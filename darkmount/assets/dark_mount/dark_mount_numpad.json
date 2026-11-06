@@ -1,0 +1,1592 @@
+{
+    "Default": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_left.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_right.webp"
+            }
+        },
+        "positions": {
+            "Left": {
+                "mimicGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                }
+            },
+            "Right": {
+                "mimicGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                }
+            }
+        },
+        "disabledKeys": {
+            "Left": [
+                "Led_NumpadRight1",
+                "Led_NumpadRight2",
+                "Led_NumpadRight3",
+                "Led_NumpadRight4",
+                "Led_NumpadRight5",
+                "Led_NumpadRight6",
+                "Led_NumpadRight7",
+                "Led_NumpadRight8",
+                "Led_NumpadRight9",
+                "Led_NumpadRight10",
+                "Led_NumpadRight11",
+                "Led_KeyboardLeft1",
+                "Led_KeyboardLeft2",
+                "Led_KeyboardLeft3",
+                "Led_KeyboardLeft4",
+                "Led_KeyboardLeft5",
+                "Led_KeyboardLeft6",
+                "Led_KeyboardLeft7",
+                "Led_KeyboardLeft8",
+                "Led_KeyboardLeft9",
+                "Led_KeyboardLeft10",
+                "Led_KeyboardLeft11"
+            ],
+            "Right": [
+                "Led_NumpadLeft1",
+                "Led_NumpadLeft2",
+                "Led_NumpadLeft3",
+                "Led_NumpadLeft4",
+                "Led_NumpadLeft5",
+                "Led_NumpadLeft6",
+                "Led_NumpadLeft7",
+                "Led_NumpadLeft8",
+                "Led_NumpadLeft9",
+                "Led_NumpadLeft10",
+                "Led_NumpadLeft11",
+                "Led_KeyboardRight1",
+                "Led_KeyboardRight2",
+                "Led_KeyboardRight3",
+                "Led_KeyboardRight4",
+                "Led_KeyboardRight5",
+                "Led_KeyboardRight6",
+                "Led_KeyboardRight7",
+                "Led_KeyboardRight8",
+                "Led_KeyboardRight9",
+                "Led_KeyboardRight10",
+                "Led_KeyboardRight11"
+            ]
+        },
+        "keys": [
+            {
+                "id": "Key_Numpad0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 85,
+                    "y": 481,
+                    "width": 72,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 439,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadEnter",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 438,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPlus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 353,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPeriodAndDelete",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 481,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 395,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadSlash",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadAsterisk",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 353,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadMinus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 216,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            }
+        ],
+        "ledMasks": [
+            {
+                "id": "Led_NumpadLeft1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_01.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 174,
+                        "width": 58,
+                        "height": 102
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_02.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 185,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_03.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 213,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_04.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 241,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_05.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 269,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_06.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 297,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_07.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 325,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_08.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 353,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_09.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 381,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_10.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 409,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadLeft11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NL_11.webp",
+                    "rect": {
+                        "x": 0,
+                        "y": 437,
+                        "width": 58,
+                        "height": 107
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_01.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 174,
+                        "width": 58,
+                        "height": 102
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_02.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 185,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_03.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 213,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_04.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 241,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_05.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 269,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight6",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_06.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 297,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight7",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_07.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 325,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight8",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_08.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 353,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight9",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_09.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 381,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight10",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_10.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 409,
+                        "width": 58,
+                        "height": 119
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadRight11",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NR_11.webp",
+                    "rect": {
+                        "x": 271,
+                        "y": 437,
+                        "width": 58,
+                        "height": 107
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadTop1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NT_01.webp",
+                    "rect": {
+                        "x": 38,
+                        "y": 128,
+                        "width": 120,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadTop2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NT_02.webp",
+                    "rect": {
+                        "x": 62,
+                        "y": 128,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadTop3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NT_03.webp",
+                    "rect": {
+                        "x": 100,
+                        "y": 128,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadTop4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NT_04.webp",
+                    "rect": {
+                        "x": 138,
+                        "y": 128,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadTop5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NT_05.webp",
+                    "rect": {
+                        "x": 176,
+                        "y": 128,
+                        "width": 115,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadBottom1",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NB_01.webp",
+                    "rect": {
+                        "x": 38,
+                        "y": 530,
+                        "width": 120,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadBottom2",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NB_02.webp",
+                    "rect": {
+                        "x": 62,
+                        "y": 530,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadBottom3",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NB_03.webp",
+                    "rect": {
+                        "x": 100,
+                        "y": 530,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadBottom4",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NB_04.webp",
+                    "rect": {
+                        "x": 138,
+                        "y": 530,
+                        "width": 134,
+                        "height": 58
+                    }
+                }
+            },
+            {
+                "id": "Led_NumpadBottom5",
+                "mask": {
+                    "source": "qrc:/manifests/dark_mount/images/masks/NB_05.webp",
+                    "rect": {
+                        "x": 176,
+                        "y": 530,
+                        "width": 115,
+                        "height": 58
+                    }
+                }
+            }
+        ]
+    },
+    "KeyBinding": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_left.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_right.webp"
+            }
+        },
+        "positions": {
+            "Left": {
+                "mimicGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                }
+            },
+            "Right": {
+                "mimicGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                }
+            }
+        },
+        "keys": [
+            {
+                "id": "Key_Numpad0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 85,
+                    "y": 481,
+                    "width": 72,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 439,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadEnter",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 438,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPlus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 353,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPeriodAndDelete",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 481,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 395,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadSlash",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadAsterisk",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 353,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadMinus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 216,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadImage0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 88,
+                    "y": 208,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 128,
+                    "y": 208,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 168,
+                    "y": 208,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 208,
+                    "y": 208,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 88,
+                    "y": 254,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 128,
+                    "y": 254,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 168,
+                    "y": 254,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            },
+            {
+                "id": "Key_NumpadImage7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 208,
+                    "y": 254,
+                    "width": 34,
+                    "height": 34,
+                    "rx": 7
+                }
+            }
+        ]
+    },
+    "CustomLightings": {
+        "images": {
+            "Left": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_left.webp"
+            },
+            "Right": {
+                "Default": "qrc:/manifests/dark_mount/images/default/numpad_right.webp"
+            }
+        },
+        "positions": {
+            "Left": {
+                "mimicGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": -213,
+                    "y": 0
+                }
+            },
+            "Right": {
+                "mimicGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                },
+                "physicalGeometryOffset": {
+                    "x": 825,
+                    "y": 0
+                }
+            }
+        },
+        "disabledKeys": {
+            "Left": [
+                "Led_NumpadRight1",
+                "Led_NumpadRight2",
+                "Led_NumpadRight3",
+                "Led_NumpadRight4",
+                "Led_NumpadRight5",
+                "Led_NumpadRight6",
+                "Led_NumpadRight7",
+                "Led_NumpadRight8",
+                "Led_NumpadRight9",
+                "Led_NumpadRight10",
+                "Led_NumpadRight11",
+                "Led_KeyboardLeft1",
+                "Led_KeyboardLeft2",
+                "Led_KeyboardLeft3",
+                "Led_KeyboardLeft4",
+                "Led_KeyboardLeft5",
+                "Led_KeyboardLeft6",
+                "Led_KeyboardLeft7",
+                "Led_KeyboardLeft8",
+                "Led_KeyboardLeft9",
+                "Led_KeyboardLeft10",
+                "Led_KeyboardLeft11"
+            ],
+            "Right": [
+                "Led_NumpadLeft1",
+                "Led_NumpadLeft2",
+                "Led_NumpadLeft3",
+                "Led_NumpadLeft4",
+                "Led_NumpadLeft5",
+                "Led_NumpadLeft6",
+                "Led_NumpadLeft7",
+                "Led_NumpadLeft8",
+                "Led_NumpadLeft9",
+                "Led_NumpadLeft10",
+                "Led_NumpadLeft11",
+                "Led_KeyboardRight1",
+                "Led_KeyboardRight2",
+                "Led_KeyboardRight3",
+                "Led_KeyboardRight4",
+                "Led_KeyboardRight5",
+                "Led_KeyboardRight6",
+                "Led_KeyboardRight7",
+                "Led_KeyboardRight8",
+                "Led_KeyboardRight9",
+                "Led_KeyboardRight10",
+                "Led_KeyboardRight11"
+            ]
+        },
+        "keys": [
+            {
+                "id": "Key_Numpad0",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 85,
+                    "y": 481,
+                    "width": 72,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 438,
+                    "width": 28,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 439,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadEnter",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 438,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPlus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 215,
+                    "y": 353,
+                    "width": 29,
+                    "height": 75,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadPeriodAndDelete",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 481,
+                    "width": 29,
+                    "height": 32,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 395,
+                    "width": 29,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 395,
+                    "width": 28,
+                    "height": 33,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumLock",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadSlash",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadAsterisk",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 311,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 172,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 129,
+                    "y": 353,
+                    "width": 29,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_Numpad7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 86,
+                    "y": 353,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Key_NumpadMinus",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 216,
+                    "y": 311,
+                    "width": 28,
+                    "height": 31,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadTop1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 58,
+                    "y": 169,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadTop2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 102,
+                    "y": 169,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadTop3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 146,
+                    "y": 169,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadTop4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 189,
+                    "y": 169,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadTop5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 233,
+                    "y": 169,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadBottom1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 58,
+                    "y": 540,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadBottom2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 102,
+                    "y": 540,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadBottom3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 146,
+                    "y": 540,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadBottom4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 189,
+                    "y": 540,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadBottom5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 233,
+                    "y": 540,
+                    "width": 38,
+                    "height": 8,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 185,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 217,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 249,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 281,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 313,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 345,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 377,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 409,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 441,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 473,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadRight11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 279,
+                    "y": 505,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft1",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 185,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft2",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 217,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft3",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 249,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft4",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 281,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft5",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 313,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft6",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 345,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft7",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 377,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft8",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 409,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft9",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 441,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft10",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 473,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            },
+            {
+                "id": "Led_NumpadLeft11",
+                "geometry": {
+                    "type": "Rect",
+                    "x": 42,
+                    "y": 505,
+                    "width": 8,
+                    "height": 26,
+                    "rx": 3
+                }
+            }
+        ]
+    },
+    "MediaDock": {}
+}

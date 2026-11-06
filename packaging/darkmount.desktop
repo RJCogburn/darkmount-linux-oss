@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Dark Mount
+GenericName=Keyboard Settings
+Comment=Configure the be quiet! Dark Mount keyboard (offline)
+Exec=darkmount-gui
+Icon=input-keyboard
+Categories=Settings;HardwareSettings;Qt;
+Keywords=keyboard;rgb;lighting;dark mount;
+StartupWMClass=darkmount
