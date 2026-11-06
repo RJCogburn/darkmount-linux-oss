@@ -36,7 +36,7 @@ The desktop app can also install this rule for you (it asks for your password).
 | Illumination | effect (Static, Color Wave, Tornado, Breathing, Reactive, Matrix), single/dual/spectrum colours, brightness, speed, direction. Animated live preview |
 | Key Binding | click a key on the rendered keyboard and assign a key or shortcut, media, mouse, lighting control, system shortcut, **Linux command**, open file/folder/website, or disable. Separate Fn layer |
 | Media Dock | menu colour, idle screen (image/clock), 12/24 h clock, screen-off timer, clock sync |
-| Product Settings | firmware versions and updates, game mode and blocked keys, layout, helper service on/off |
+| Product Settings | firmware versions and updates, game mode and blocked keys, layout, helper service on/off, start in tray at login |
 
 **AppImage** (bundled Python and Qt, ~60 MB):
 
@@ -48,6 +48,12 @@ packaging/build-appimage.sh                     # -> dist/darkmount-linux-x86_64
 ```
 
 **From source** (needs PySide6, e.g. `pacman -S pyside6`): `python3 -m darkmount.ui`
+
+**System tray:** closing the window keeps the app in the tray. Its menu has backlight
+on/off, effect, brightness, game mode, dock clock sync and Quit. While hidden it
+releases the keyboard, so the background service keeps working. *Start in tray at
+login* (Product Settings) adds an autostart entry; `--tray` starts hidden, and
+launching the app again brings up the running instance.
 
 ## Command line
 

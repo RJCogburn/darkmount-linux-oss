@@ -33,7 +33,7 @@ uv pip install --quiet --python "$APPDIR/usr/python/bin/python3" \
 QT="$APPDIR/usr/site/PySide6"
 # trim modules this app never uses (keeps Core/Gui/Widgets/Svg/DBus/OpenGL/Wayland/XCB)
 for m in Qml Quick QuickWidgets QuickControls2 QuickTest Designer Help Pdf PdfWidgets \
-         Sql Test Xml Concurrent Network NetworkAuth PrintSupport UiTools StateMachine \
+         Sql Test Xml Concurrent NetworkAuth PrintSupport UiTools StateMachine \
          SpatialAudio Multimedia MultimediaWidgets RemoteObjects Scxml Sensors SerialPort \
          SerialBus TextToSpeech WebChannel WebSockets HttpServer Positioning Nfc \
          Bluetooth 3D Charts DataVisualization Graphs Location; do

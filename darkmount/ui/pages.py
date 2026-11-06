@@ -923,6 +923,17 @@ class SettingsPage(Page):
         self.svc_state = label("", "Muted")
         self.svc_state.setWordWrap(True)
         self.body.addWidget(self.svc_state)
+
+        self.body.addSpacing(8)
+        at = QHBoxLayout()
+        at.addLayout(info_label("START IN TRAY AT LOGIN",
+                                "Start this app hidden in the system tray when you log in. "
+                                "Closing the window always keeps it in the tray; use Quit "
+                                "in the tray menu to exit."))
+        self.autostart = Toggle()
+        self.autostart.toggled.connect(self._autostart)
+        at.addWidget(self.autostart)
+        self.body.addLayout(at)
         self.body.addStretch()
 
     def load(self, kb: DarkMount):
@@ -948,6 +959,8 @@ class SettingsPage(Page):
             self.layout_lbl.setText(f"{phys} {vis}")
             self.info.setText(f"Serial {kb.serial_number()} · polling {kb.polling_rate()} Hz")
             self._service_status()
+            from .tray import autostart_enabled
+            self.autostart.setChecked(autostart_enabled(self.app.DESKTOP_ID))
         finally:
             self.loading = False
 
@@ -989,6 +1002,12 @@ class SettingsPage(Page):
         if not self.pkg:
             return
         self.app.begin_firmware_update(self.pkg, self.installed)
+
+    def _autostart(self, on):
+        if self.loading:
+            return
+        from .tray import set_autostart
+        set_autostart(self.app.DESKTOP_ID, self.app.APP_NAME, on)
 
     def _game(self, on):
         if not self.loading:

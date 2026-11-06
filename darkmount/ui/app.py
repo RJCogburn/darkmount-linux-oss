@@ -63,12 +63,21 @@ class DockView(QWidget):
         p.end()
 
 
+DESKTOP_ID = APP_NAME
+
+
 class MainWindow(QMainWindow):
+    APP_NAME = APP_NAME
+    DESKTOP_ID = DESKTOP_ID
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle(f"{APP_NAME} — Dark Mount")
         self.resize(1440, 900)
         self.kb: DarkMount | None = None
+        self.tray = None
+        self._quitting = False
+        self._tray_hint_shown = False
 
         root = QWidget(objectName="Root")
         v = QVBoxLayout(root)
@@ -361,7 +370,47 @@ class MainWindow(QMainWindow):
                           "depict the supported hardware.<br><br>"
                           "Command line: <code>darkmount --help</code>")
 
+    # -- system tray ---------------------------------------------------------------------
+    def reload_pages(self):
+        if self.kb:
+            try:
+                for p in (self.illum, self.keys, self.dock, self.settings):
+                    p.load(self.kb)
+                self._preview()
+            except (QLinkError, OSError):
+                pass
+
+    def show_from_tray(self):
+        self.show()
+        self.setWindowState(self.windowState() & ~Qt.WindowMinimized)
+        self.raise_()
+        self.activateWindow()
+        if self.kb:
+            self.reload_pages()
+        else:
+            self.connect_device()
+
+    def hide_to_tray(self):
+        """Hide and let go of the keyboard so the background service can work."""
+        self.hide()
+        self.reconnect_timer.stop()
+        self.view.timer.stop()
+        self.drop()
+        if self.tray and not self._tray_hint_shown:
+            self._tray_hint_shown = True
+            self.tray.showMessage(APP_NAME, "Still running in the system tray. "
+                                  "Use Quit in its menu to exit.", self.tray.icon(), 4000)
+
+    def quit_app(self):
+        self._quitting = True
+        self.drop()
+        QApplication.quit()
+
     def closeEvent(self, e):
+        if self.tray and self.tray.isVisible() and not self._quitting:
+            e.ignore()
+            self.hide_to_tray()
+            return
         self.drop()
         super().closeEvent(e)
 
@@ -372,15 +421,32 @@ def main(argv=None):
         from ..cli import main as cli_main
         rest = argv[2:]
         return cli_main((["daemon"] if argv[1] == "--daemon" else []) + rest)
+    from PySide6.QtWidgets import QSystemTrayIcon
+    from . import tray as T
+    start_hidden = "--tray" in argv
+    argv = [a for a in argv if a != "--tray"]
     os.environ.setdefault("QT_QPA_PLATFORMTHEME", "")
     app = QApplication(argv)
     app.setApplicationName(APP_NAME)
-    app.setDesktopFileName(APP_NAME)
+    app.setDesktopFileName(DESKTOP_ID)
+    if T.notify_running_instance():
+        return 0  # already running (e.g. in the tray): it shows its window
     app.setStyle("Fusion")
     app.setStyleSheet(stylesheet(load_fonts()))
     app.setWindowIcon(app_icon())
     w = MainWindow()
-    w.show()
+    server = T.listen_for_instances(w.show_from_tray)  # noqa: F841 (kept alive)
+    if QSystemTrayIcon.isSystemTrayAvailable():
+        app.setQuitOnLastWindowClosed(False)
+        w.tray = T.Tray(w, APP_NAME)
+        w.tray.show()
+    else:
+        start_hidden = False
+    if start_hidden:
+        w.hide_to_tray()
+        w._tray_hint_shown = True
+    else:
+        w.show()
     return app.exec()
 
 
