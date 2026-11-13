@@ -1,0 +1,284 @@
+// Small widgets in the IO Center style, shared by the device pages.
+
+import { LineEdit } from "std-widgets.slint";
+import { Theme, Label, Muted } from "theme.slint";
+
+// Thin IO Center–style slider: grey groove, lighter fill, small square handle.
+export component Slider inherits Rectangle {
+    in property <float> minimum: 0;
+    in property <float> maximum: 100;
+    in-out property <float> value;
+    in property <bool> enabled: true;
+    callback moved(float);
+    callback released(float);
+    height: 20px;
+    opacity: root.enabled ? 1 : 0.4;
+    property <float> frac: (root.value - root.minimum) / max(1, root.maximum - root.minimum);
+    Rectangle {
+        y: (parent.height - 3px) / 2;
+        height: 3px;
+        background: Theme.n600;
+    }
+    Rectangle {
+        x: 0px;
+        y: (parent.height - 3px) / 2;
+        height: 3px;
+        width: root.frac * root.width;
+        background: Theme.n300;
+    }
+    Rectangle {
+        x: root.frac * (root.width - self.width);
+        width: 8px;
+        height: 17px;
+        background: ta.has-hover || ta.pressed ? Theme.n0 : Theme.n100;
+    }
+    ta := TouchArea {
+        enabled: root.enabled;
+        mouse-cursor: pointer;
+        function set(px: length) {
+            root.value = Math.round(root.minimum + Math.clamp(px / root.width, 0, 1)
+                                    * (root.maximum - root.minimum));
+            root.moved(root.value);
+        }
+        pointer-event(e) => {
+            if (e.kind == PointerEventKind.down && e.button == PointerEventButton.left) {
+                self.set(self.mouse-x);
+            } else if (e.kind == PointerEventKind.up && e.button == PointerEventButton.left) {
+                root.released(root.value);
+            }
+        }
+        moved => { self.set(self.mouse-x); }
+    }
+}
+
+// On/off switch (title row of a panel).
+export component Toggle inherits Rectangle {
+    in-out property <bool> checked;
+    in property <bool> enabled: true;
+    callback toggled(bool);
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background: !root.enabled ? Theme.n600 : root.checked ? Theme.accent : Theme.n500;
+    knob := Rectangle {
+        width: 16px;
+        height: 16px;
+        y: 2px;
+        x: root.checked ? root.width - self.width - 2px : 2px;
+        border-radius: 8px;
+        background: Theme.n0;
+        animate x { duration: 120ms; }
+    }
+    TouchArea {
+        enabled: root.enabled;
+        mouse-cursor: pointer;
+        clicked => {
+            root.checked = !root.checked;
+            root.toggled(root.checked);
+        }
+    }
+}
+
+// Icon-over-text tile (effects, panel tabs).
+export component Tile inherits Rectangle {
+    in property <image> icon;
+    in property <string> text;
+    in property <bool> checked;
+    in property <bool> enabled: true;
+    callback clicked;
+    width: 85px;
+    height: 56px;
+    background: root.checked ? Theme.n800 : transparent;
+    VerticalLayout {
+        alignment: center;
+        spacing: 4px;
+        Image {
+            source: root.icon;
+            height: 20px;
+            colorize: !root.enabled ? Theme.n500 : root.checked ? Theme.accent
+                : ta.has-hover ? Theme.n100 : Theme.n300;
+        }
+        Text {
+            text: root.text;
+            horizontal-alignment: center;
+            font-size: 11px;
+            color: !root.enabled ? Theme.n500 : root.checked ? Theme.accent
+                : ta.has-hover ? Theme.n100 : Theme.n300;
+        }
+    }
+    ta := TouchArea {
+        enabled: root.enabled;
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
+// One button of a segmented control.
+export component Segment inherits Rectangle {
+    in property <string> text;
+    in property <bool> checked;
+    callback clicked;
+    height: 34px;
+    horizontal-stretch: 1;
+    background: root.checked ? Theme.n900 : Theme.n800;
+    Text {
+        text: root.text;
+        font-size: 11px;
+        color: root.checked ? Theme.accent : ta.has-hover ? Theme.n0 : Theme.n100;
+    }
+    ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component Swatch inherits Rectangle {
+    in property <color> value;
+    in property <bool> selected;
+    callback clicked;
+    width: 22px;
+    height: 22px;
+    background: root.value;
+    border-width: root.selected ? 2px : ta.has-hover ? 1px : 0px;
+    border-color: Theme.n0;
+    ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
+export global ColorUtil {
+    pure public function hex(c: color) -> string {
+        // the bar shows the color itself; this is the label under it
+        return "#" + ColorUtil.h2(c.red) + ColorUtil.h2(c.green) + ColorUtil.h2(c.blue);
+    }
+    pure public function h2(v: int) -> string {
+        return ColorUtil.d(Math.floor(v / 16)) + ColorUtil.d(Math.mod(v, 16));
+    }
+    pure public function d(v: int) -> string {
+        return v < 10 ? "" + v : v == 10 ? "a" : v == 11 ? "b" : v == 12 ? "c"
+            : v == 13 ? "d" : v == 14 ? "e" : "f";
+    }
+}
+
+// "COLOR ... CHANGE", a wide color bar and the presets row (as in IO Center).
+// CHANGE opens a picker with a palette, RGB sliders and a hex field.
+export component ColorPicker inherits VerticalLayout {
+    in property <string> title: "COLOR";
+    in-out property <color> value: #ff2800;
+    callback changed(color);
+    // a hex string from the field, parsed by the app
+    callback hex-entered(string) -> color;
+    property <[color]> presets: [#ff2800, #ffe03c, #00ff00, #00ffff, #0000ff, #a020f0, #ff00aa, #ff0000];
+    property <[color]> palette: [#ff0000, #ff4000, #ff8000, #ffbf00, #ffff00, #bfff00, #80ff00, #00ff00,
+        #00ff80, #00ffff, #0080ff, #0000ff, #4000ff, #8000ff, #bf00ff, #ff00ff,
+        #ff0080, #ffffff, #c0c0c0, #808080, #ff2800, #ee7f00, #ffe03c, #a020f0];
+    spacing: 8px;
+
+    HorizontalLayout {
+        Label { text: root.title; }
+        Rectangle { horizontal-stretch: 1; }
+        Text {
+            text: "CHANGE";
+            color: change-ta.has-hover ? Theme.accent-hover : Theme.accent;
+            font-size: 11px;
+            font-weight: 700;
+            change-ta := TouchArea {
+                mouse-cursor: pointer;
+                clicked => { popup.show(); }
+            }
+        }
+    }
+    Rectangle {
+        height: 48px;
+        background: root.value;
+        TouchArea {
+            mouse-cursor: pointer;
+            clicked => { popup.show(); }
+        }
+    }
+    Muted { text: "PRESETS — click one to apply it."; font-size: 11px; }
+    HorizontalLayout {
+        spacing: 12px;
+        alignment: start;
+        for c in root.presets: Swatch {
+            value: c;
+            clicked => {
+                root.value = c;
+                root.changed(c);
+            }
+        }
+    }
+
+    popup := PopupWindow {
+        x: 0px;
+        y: 0px;
+        width: 300px;
+        close-policy: close-on-click-outside;
+        Rectangle {
+            background: Theme.n700;
+            border-width: 1px;
+            border-color: Theme.n500;
+            VerticalLayout {
+                padding: 12px;
+                spacing: 10px;
+                Label { text: "Choose color"; font-weight: 700; }
+                for row in [0, 1, 2]: HorizontalLayout {
+                    spacing: 6px;
+                    for col in [0, 1, 2, 3, 4, 5, 6, 7]: Swatch {
+                        width: 28px;
+                        height: 28px;
+                        value: root.palette[row * 8 + col];
+                        selected: root.value == self.value;
+                        clicked => {
+                            root.value = self.value;
+                            root.changed(self.value);
+                        }
+                    }
+                }
+                for ch in ["R", "G", "B"]: HorizontalLayout {
+                    spacing: 8px;
+                    Label { text: ch; width: 14px; vertical-alignment: center; }
+                    Slider {
+                        minimum: 0;
+                        maximum: 255;
+                        value: ch == "R" ? root.value.red : ch == "G" ? root.value.green : root.value.blue;
+                        released(v) => {
+                            root.value = Colors.rgb(
+                                ch == "R" ? v : root.value.red,
+                                ch == "G" ? v : root.value.green,
+                                ch == "B" ? v : root.value.blue);
+                            root.changed(root.value);
+                        }
+                    }
+                }
+                HorizontalLayout {
+                    spacing: 8px;
+                    Rectangle { width: 40px; background: root.value; }
+                    LineEdit {
+                        text: ColorUtil.hex(root.value);
+                        accepted(t) => {
+                            root.value = root.hex-entered(t);
+                            root.changed(root.value);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// "TITLE" over a 0–100 slider; reports when the user lets go.
+export component SliderRow inherits VerticalLayout {
+    in property <string> title;
+    in-out property <float> value: 50;
+    callback released(float);
+    spacing: 6px;
+    Label { text: root.title; }
+    Slider {
+        minimum: 0;
+        maximum: 100;
+        value <=> root.value;
+        released(v) => { root.released(v); }
+    }
+}

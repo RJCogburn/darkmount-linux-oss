@@ -1,0 +1,94 @@
+// darkmount-linux: the main window. A top bar (name, version, keyboard access) over
+// the Dark Mount page, with the program picker on top when it's open.
+
+import { Theme, Muted, Button } from "theme.slint";
+import { AppPicker, AppPickerOverlay, AppItem } from "apppicker.slint";
+import { DarkMountPage, PartVisual, KeyVisual, MaskVisual, Illumination, KeyBinding, MediaDock, ProductSettings, FirmwarePart } from "darkmount.slint";
+export { Illumination, KeyBinding, MediaDock, ProductSettings, FirmwarePart, PartVisual, KeyVisual, MaskVisual }
+export { AppPicker, AppItem }
+
+export component MainWindow inherits Window {
+    title: "darkmount-linux";
+    preferred-width: 1320px;
+    preferred-height: 860px;
+    min-width: 960px;
+    min-height: 600px;
+    background: Theme.n800;
+    default-font-family: Theme.font;
+
+    in property <string> version;
+    callback find-device();
+    // no permission to open the keyboard: offer to install the udev rule
+    in property <bool> need-access;
+    callback grant-access();
+    // the Dark Mount page
+    in property <string> dm-name: "be quiet! Dark Mount";
+    in property <string> dm-status: "Looking for the keyboard…";
+    in property <bool> dm-connected;
+    in-out property <int> dm-panel: 0;
+    in property <[PartVisual]> dm-parts;
+    in property <[KeyVisual]> dm-keys;
+    in property <[MaskVisual]> dm-masks;
+    in property <[float]> dm-bounds: [0, 0, 1, 1];
+    callback dm-key-clicked(string);
+    callback dm-panel-changed(int);
+
+    VerticalLayout {
+        Rectangle {
+            height: 64px;
+            background: Theme.n900;
+            HorizontalLayout {
+                padding-left: 24px;
+                padding-right: 24px;
+                spacing: 0px;
+                Text {
+                    text: "darkmount";
+                    color: Theme.n0;
+                    font-size: 16px;
+                    font-weight: 700;
+                    vertical-alignment: center;
+                }
+                Text {
+                    text: "-linux";
+                    color: Theme.accent;
+                    font-size: 16px;
+                    font-weight: 700;
+                    vertical-alignment: center;
+                }
+                Muted { text: "    " + root.version; vertical-alignment: center; }
+                Rectangle { horizontal-stretch: 1; }
+                if root.need-access: VerticalLayout {
+                    alignment: center;
+                    Button { text: "Grant access (installs a udev rule)"; primary: true; width: 270px; clicked => { root.grant-access(); } }
+                }
+                Rectangle { width: 12px; }
+                VerticalLayout {
+                    alignment: center;
+                    Button { text: root.dm-connected ? "Connected" : "Find Device"; primary: !root.need-access; width: 124px; clicked => { root.find-device(); } }
+                }
+            }
+        }
+        Rectangle {
+            vertical-stretch: 1;
+            DarkMountPage {
+                device-name: root.dm-name;
+                status: root.dm-status;
+                connected: root.dm-connected;
+                panel <=> root.dm-panel;
+                parts: root.dm-parts;
+                keys: root.dm-keys;
+                masks: root.dm-masks;
+                bx: root.dm-bounds[0];
+                by: root.dm-bounds[1];
+                bw: root.dm-bounds[2];
+                bh: root.dm-bounds[3];
+                key-clicked(name) => { root.dm-key-clicked(name); }
+                panel-changed(i) => { root.dm-panel-changed(i); }
+            }
+        }
+    }
+    AppPickerOverlay {
+        width: root.width;
+        height: root.height;
+    }
+}

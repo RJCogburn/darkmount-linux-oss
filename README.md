@@ -2,13 +2,16 @@
 
 Unofficial, **offline** Linux control for the **be quiet! Dark Mount** keyboard:
 lighting, key remapping (including the Fn layer and the numpad display keys),
-game mode, media dock settings, dock clock sync and **firmware updates**. There's a command-line tool,
-a background helper service and a desktop app, which you can also get as an
-AppImage.
+game mode, media dock settings and its keys, dock clock sync and **firmware
+updates**. There's a desktop app, a command-line tool and a background helper
+service, written in Rust and shipped together as one small AppImage (~12 MB, no
+runtime dependencies).
 
 The vendor's own configuration software is Windows-only, or a web app that needs
 an internet connection. This project talks to the keyboard directly over
 `/dev/hidraw` and never goes online.
+
+![darkmount-linux: the Illumination page with a live preview of the keyboard](docs/screenshot.png)
 
 > **Not affiliated with be quiet!** “be quiet!” and “Dark Mount” are trademarks
 > of their respective owner and are used here only to say which hardware this
@@ -35,19 +38,28 @@ The desktop app can also install this rule for you (it asks for your password).
 |---|---|
 | Illumination | effect (Static, Color Wave, Tornado, Breathing, Reactive, Matrix), single/dual/spectrum colours, brightness, speed, direction. Animated live preview |
 | Key Binding | click a key on the rendered keyboard and assign a key or shortcut, media, mouse, lighting control, system shortcut, **Linux command**, open file/folder/website, or disable. Separate Fn layer |
-| Media Dock | menu colour, idle screen (image/clock), 12/24 h clock, screen-off timer, clock sync |
+| Media Dock | menu colour, idle screen (image/clock), 12/24 h clock, screen-off timer, clock sync. Click one of the dock's four keys to rebind it |
 | Product Settings | firmware versions and updates, game mode and blocked keys, layout, helper service on/off, start in tray at login |
 
-**AppImage** (bundled Python and Qt, ~60 MB):
+**AppImage** (from [Releases](https://github.com/RJCogburn/darkmount-linux-oss/releases)):
 
 ```bash
-packaging/build-appimage.sh                     # -> dist/darkmount-linux-x86_64.AppImage
-./darkmount-linux-x86_64.AppImage               # desktop app
-./darkmount-linux-x86_64.AppImage --cli info    # same commands as `darkmount`
-./darkmount-linux-x86_64.AppImage --daemon      # background service
+chmod +x darkmount-linux-x86_64.AppImage
+./darkmount-linux-x86_64.AppImage                    # desktop app
+./darkmount-linux-x86_64.AppImage darkmount info     # the `darkmount` command (also: --cli info)
+ln -s "$PWD/darkmount-linux-x86_64.AppImage" ~/.local/bin/darkmount   # then just `darkmount …`
 ```
 
-**From source** (needs PySide6, e.g. `pacman -S pyside6`): `python3 -m darkmount.ui`
+**From source** (Rust 1.88 or newer):
+
+```bash
+cargo build --release                # target/release/darkmount-linux and target/release/darkmount
+./target/release/darkmount-linux     # finds assets/ in the source tree
+packaging/build-appimage.sh          # -> dist/darkmount-linux-x86_64.AppImage
+```
+
+For a system install, put the two programs in `/usr/bin` and `assets/` in
+`/usr/share/darkmount-linux/assets` (`$DARKMOUNT_ASSETS` overrides the location).
 
 **System tray:** closing the window keeps the app in the tray. Its menu has backlight
 on/off, effect, brightness, game mode, dock clock sync and Quit. While hidden it
@@ -57,8 +69,8 @@ launching the app again brings up the running instance.
 
 ## Command line
 
-Python 3.10+ standard library only. Run it with `python3 -m darkmount …`, or install
-it with `pipx install .` or `uv tool install .`.
+`darkmount` is a single program with no dependencies (from the AppImage, or
+`target/release/darkmount`).
 
 ```bash
 darkmount info                      # serial, firmware, layout, current settings
@@ -92,12 +104,14 @@ darkmount backup save | list | restore [FILE]
 
 ## Background service
 
+Toggle **Linux helper service** in the app's Product Settings: it installs a
+systemd user service that runs this copy of the program (the AppImage, or the
+`darkmount` installed next to the app). By hand:
+
 ```bash
 cp systemd/darkmount-clock.service ~/.config/systemd/user/   # adjust ExecStart if needed
 systemctl --user enable --now darkmount-clock.service
 ```
-
-(or toggle **Linux helper service** in the app's Product Settings.)
 
 The service:
 
@@ -164,18 +178,18 @@ vendor collection (usage page `0xFF00`), with no report ID:
   layer must be `0x80`; `0x01` is rejected on 1.19.0. `GetBindings` returns
   stale data for ~1 s after a write.
 
-See `darkmount/qlink.py`, `device.py` and `bindings.py` for the details.
+See `crates/core/src/darkmount/` (`qlink.rs`, `device.rs`, `bindings.rs`) for the details.
 
 ## Notice
 
 This is an independent, unofficial project. It is not affiliated with, endorsed by
 or supported by be quiet! or Listan GmbH. Use at your own risk.
 
-The keyboard renders and layout data in `darkmount/assets/dark_mount/` originate
+The keyboard renders and layout data in `assets/dark_mount/` originate
 from the vendor's configuration software. The vendor logo has been removed
-(`packaging/remove_logo.py`), and the assets are included only to depict the
+(`packaging/remove_logo.py`, a one-off PySide6 script), and the assets are included only to depict the
 hardware this software controls. If you are the rights holder and want them
 removed, please open an issue.
 
-The Inter font (`darkmount/assets/fonts/`) is © The Inter Project Authors and
+The Inter font (`assets/fonts/`) is © The Inter Project Authors and
 licensed under the SIL Open Font License 1.1.

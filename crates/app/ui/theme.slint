@@ -1,0 +1,68 @@
+// Look & feel carried over from the Python app (IO Center style: dark neutrals,
+// orange accent, Inter).
+
+import "../../../assets/fonts/Inter-Regular.ttf";
+import "../../../assets/fonts/Inter-Medium.ttf";
+import "../../../assets/fonts/Inter-Bold.ttf";
+
+export global Theme {
+    out property <color> accent: #ee7f00;
+    out property <color> accent-hover: #f19933;
+    out property <color> n0: #ffffff;
+    out property <color> n100: #e1e1e1;
+    out property <color> n300: #929395;
+    out property <color> n400: #76777a;
+    out property <color> n500: #4a4c51;
+    out property <color> n600: #2c2e31;
+    out property <color> n700: #1d1d1d;
+    out property <color> n800: #121212;
+    out property <color> n900: #000000;
+    out property <color> panel: #1b1b1b;
+    out property <color> stage: #1e1e1e;
+    out property <color> ok: #7fd67f;
+    out property <color> warn: #ffb340;
+    out property <string> font: "Inter";
+    out property <length> text: 13px;
+}
+
+export component Label inherits Text {
+    color: Theme.n100;
+    font-family: Theme.font;
+    font-size: Theme.text;
+}
+
+export component Muted inherits Text {
+    color: Theme.n300;
+    font-family: Theme.font;
+    font-size: 12px;
+}
+
+export component PageTitle inherits Text {
+    color: Theme.n0;
+    font-family: Theme.font;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+export component Button inherits Rectangle {
+    in property <string> text;
+    in property <bool> primary;
+    in property <bool> enabled: true;
+    callback clicked;
+    height: 32px;
+    min-width: label.preferred-width + 28px;
+    background: !root.enabled ? Theme.n600
+        : root.primary ? (ta.has-hover ? Theme.accent-hover : Theme.accent)
+        : (ta.has-hover ? #5a5c61 : Theme.n500);
+    label := Text {
+        text: root.text;
+        color: !root.enabled ? Theme.n400 : root.primary ? Theme.n900 : Theme.n100;
+        font-family: Theme.font;
+        font-size: Theme.text;
+    }
+    ta := TouchArea {
+        enabled: root.enabled;
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}

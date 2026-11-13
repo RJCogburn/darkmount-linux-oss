@@ -1,0 +1,113 @@
+// "Choose a program": installed programs with icons, a search box that filters as
+// you type, and a way to pick any file that isn't listed (AppImages, scripts).
+
+import { LineEdit, ListView } from "std-widgets.slint";
+import { Theme, Label, Muted, PageTitle, Button } from "theme.slint";
+
+export struct AppItem { name: string, comment: string, icon: image, command: string }
+
+export global AppPicker {
+    in-out property <bool> open;
+    in-out property <string> query;
+    in property <[AppItem]> items;
+    in property <int> total;
+    callback search(string);
+    callback chosen(int);
+    callback browse();
+    callback cancel();
+}
+
+component AppRow inherits Rectangle {
+    in property <AppItem> item;
+    callback clicked;
+    height: 52px;
+    background: ta.has-hover ? Theme.n600 : transparent;
+    HorizontalLayout {
+        padding-left: 12px;
+        padding-right: 12px;
+        spacing: 12px;
+        Rectangle {
+            width: 32px;
+            if root.item.icon.width > 0: Image {
+                source: root.item.icon;
+                width: 32px;
+                height: 32px;
+            }
+            if root.item.icon.width == 0: Image {
+                source: @image-url("icons/plus.svg");
+                width: 26px;
+                height: 26px;
+                colorize: Theme.n400;
+            }
+        }
+        VerticalLayout {
+            alignment: center;
+            spacing: 2px;
+            Text { text: root.item.name; color: Theme.n0; font-size: 13px; overflow: elide; }
+            Text {
+                text: root.item.comment != "" ? root.item.comment : root.item.command;
+                color: Theme.n300;
+                font-size: 11px;
+                overflow: elide;
+            }
+        }
+    }
+    ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component AppPickerOverlay inherits Rectangle {
+    visible: AppPicker.open;
+    background: #000000a0;
+    // clicks outside the box close it
+    TouchArea { clicked => { AppPicker.cancel(); } }
+    Rectangle {
+        width: min(560px, root.width - 40px);
+        height: min(640px, root.height - 40px);
+        background: Theme.n700;
+        border-width: 1px;
+        border-color: Theme.n500;
+        TouchArea { }   // keep clicks inside from closing it
+        VerticalLayout {
+            padding: 16px;
+            spacing: 10px;
+            HorizontalLayout {
+                PageTitle { text: "CHOOSE A PROGRAM"; }
+                Rectangle { horizontal-stretch: 1; }
+                Muted {
+                    text: AppPicker.items.length == AppPicker.total ? AppPicker.total + " installed"
+                        : AppPicker.items.length + " of " + AppPicker.total;
+                    vertical-alignment: center;
+                }
+            }
+            search := LineEdit {
+                placeholder-text: "Search by name, description or keyword…";
+                text <=> AppPicker.query;
+                edited(t) => { AppPicker.search(t); }
+                accepted => { if (AppPicker.items.length > 0) { AppPicker.chosen(0); } }
+            }
+            ListView {
+                vertical-stretch: 1;
+                for item[i] in AppPicker.items: AppRow {
+                    item: item;
+                    clicked => { AppPicker.chosen(i); }
+                }
+            }
+            if AppPicker.items.length == 0: Muted {
+                text: "Nothing matches. Not installed as a program? Pick its file instead.";
+                wrap: word-wrap;
+            }
+            HorizontalLayout {
+                spacing: 8px;
+                Button { text: "Browse for a file…"; clicked => { AppPicker.browse(); } }
+                Rectangle { horizontal-stretch: 1; }
+                Button { text: "Cancel"; clicked => { AppPicker.cancel(); } }
+            }
+        }
+    }
+    changed visible => {
+        if (self.visible) { search.focus(); }
+    }
+}

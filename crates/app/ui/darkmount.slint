@@ -1,0 +1,723 @@
+// Dark Mount page: device bar, panel tabs on the left, the keyboard picture with
+// the lighting preview (or clickable keys) on the stage.
+
+import { ComboBox, LineEdit, TextEdit, ScrollView, SpinBox, CheckBox } from "std-widgets.slint";
+import { Theme, Label, Muted, PageTitle, Button } from "theme.slint";
+import { Toggle, Tile, Segment, Swatch, ColorPicker, SliderRow } from "widgets.slint";
+
+export struct PartVisual { image: image, x: float }
+export struct KeyVisual {
+    name: string, x: float, y: float, w: float, h: float, r: float,
+    color: color, lit: bool,
+    // key mode: 0 normal, 1 selected, 2 has a binding, 3 not bindable
+    state: int,
+}
+export struct MaskVisual { image: image, x: float, y: float, w: float, h: float, color: color, lit: bool }
+
+export component KeyboardView inherits Rectangle {
+    in property <[PartVisual]> parts;
+    in property <[KeyVisual]> keys;
+    in property <[MaskVisual]> masks;
+    in property <float> bx;
+    in property <float> by;
+    in property <float> bw: 1;
+    in property <float> bh: 1;
+    in property <bool> key-mode;
+    callback key-clicked(string);
+    property <float> sc: max(0.1, min((root.width - 40px) / (root.bw * 1px),
+                                       (root.height - 40px) / (root.bh * 1px)));
+    property <length> ox: (root.width - root.bw * root.sc * 1px) / 2 - root.bx * root.sc * 1px;
+    property <length> oy: (root.height - root.bh * root.sc * 1px) / 2 - root.by * root.sc * 1px;
+
+    for p in root.parts: Image {
+        source: p.image;
+        x: root.ox + p.x * root.sc * 1px;
+        y: root.oy;
+        width: self.source.width * root.sc * 1px;
+        height: self.source.height * root.sc * 1px;
+    }
+    if !root.key-mode: Rectangle {
+        for m in root.masks: Image {
+            visible: m.lit;
+            source: m.image;
+            x: root.ox + m.x * root.sc * 1px;
+            y: root.oy + m.y * root.sc * 1px;
+            width: m.w * root.sc * 1px;
+            height: m.h * root.sc * 1px;
+            colorize: m.color;
+            opacity: 0.9;
+        }
+        for k in root.keys: Rectangle {
+            visible: k.lit;
+            x: root.ox + (k.x + 1) * root.sc * 1px;
+            y: root.oy + (k.y + 1) * root.sc * 1px;
+            width: (k.w - 2) * root.sc * 1px;
+            height: (k.h - 2) * root.sc * 1px;
+            border-radius: k.r * root.sc * 1px;
+            background: k.color.with-alpha(0.78);
+        }
+    }
+    if root.key-mode: Rectangle {
+        for k in root.keys: Rectangle {
+            x: root.ox + (k.x - 1) * root.sc * 1px;
+            y: root.oy + (k.y - 1) * root.sc * 1px;
+            width: (k.w + 2) * root.sc * 1px;
+            height: (k.h + 2) * root.sc * 1px;
+            border-radius: (k.r + 1) * root.sc * 1px;
+            background: k.state == 3 ? #00000096
+                : k.state == 1 ? Theme.accent.with-alpha(0.67)
+                : k.state == 2 ? Theme.accent.with-alpha(0.27) : transparent;
+            border-width: k.state == 2 ? 1.6px : ta.has-hover && k.state != 3 ? 1.4px : 0px;
+            border-color: k.state == 2 ? Theme.accent : Theme.n100;
+            ta := TouchArea {
+                enabled: k.state != 3;
+                mouse-cursor: pointer;
+                clicked => { root.key-clicked(k.name); }
+            }
+        }
+    }
+}
+
+// The Illumination panel's state; the app reads it when something changes.
+export global Illumination {
+    in-out property <bool> on: true;
+    // 0 Static, 1 Color Wave, 2 Tornado, 3 Breathing, 4 Reactive, 5 Matrix
+    in-out property <int> effect: 0;
+    // which color modes the effect offers: SINGLE, DUAL, SPECTRUM
+    in-out property <[bool]> modes: [true, false, false];
+    // 0 single, 1 dual, 2 spectrum
+    in-out property <int> mode: 0;
+    in-out property <color> color1: #ff2800;
+    in-out property <color> color2: #0078ff;
+    in-out property <[color]> stops: [];
+    in-out property <[string]> directions: [];
+    in-out property <int> direction: 0;
+    in-out property <float> brightness: 100;
+    in-out property <float> speed: 50;
+    // effect tile clicked / mode clicked / anything else changed
+    callback effect-clicked(int);
+    callback mode-clicked(int);
+    callback changed();
+    in-out property <int> selected-stop: 0;
+    in-out property <color> stop-color: #ff0000;
+    callback stop-clicked(int);
+    callback stop-color-changed();
+    callback stops-add(int);
+    callback hex-to-color(string) -> color;
+}
+
+component IlluminationPanel inherits VerticalLayout {
+    property <[{text: string, icon: image}]> effects: [
+        { text: "Static", icon: @image-url("icons/static.svg") },
+        { text: "Color Wave", icon: @image-url("icons/wave.svg") },
+        { text: "Tornado", icon: @image-url("icons/tornado.svg") },
+        { text: "Breathing", icon: @image-url("icons/breathing.svg") },
+        { text: "Reactive", icon: @image-url("icons/reactive.svg") },
+        { text: "Matrix", icon: @image-url("icons/matrix.svg") },
+    ];
+    padding: 16px;
+    spacing: 10px;
+    alignment: start;
+    HorizontalLayout {
+        PageTitle { text: "ILLUMINATION"; }
+        Rectangle { horizontal-stretch: 1; }
+        Toggle {
+            checked <=> Illumination.on;
+            toggled => { Illumination.changed(); }
+        }
+    }
+    Label { text: "EFFECTS"; }
+    Rectangle {
+        background: Theme.n600;
+        height: 2 * 56px + 8px;
+        for e[i] in root.effects: Tile {
+            x: 4px + Math.mod(i, 4) * 85px;
+            y: 4px + Math.floor(i / 4) * 56px;
+            icon: e.icon;
+            text: e.text;
+            enabled: Illumination.on;
+            checked: Illumination.effect == i;
+            clicked => { Illumination.effect-clicked(i); }
+        }
+    }
+    if (Illumination.modes[0] ? 1 : 0) + (Illumination.modes[1] ? 1 : 0) + (Illumination.modes[2] ? 1 : 0) > 1: VerticalLayout {
+        spacing: 8px;
+        Label { text: "COLOR MODE"; }
+        HorizontalLayout {
+            for name[i] in ["SINGLE", "DUAL", "SPECTRUM"]: Segment {
+                visible: Illumination.modes[i];
+                text: name;
+                checked: Illumination.mode == i;
+                clicked => { Illumination.mode-clicked(i); }
+            }
+        }
+    }
+    if Illumination.mode != 2: ColorPicker {
+        title: "COLOR";
+        value <=> Illumination.color1;
+        changed => { Illumination.changed(); }
+        hex-entered(t) => { return Illumination.hex-to-color(t); }
+    }
+    if Illumination.mode == 1: ColorPicker {
+        title: "SECOND COLOR";
+        value <=> Illumination.color2;
+        changed => { Illumination.changed(); }
+        hex-entered(t) => { return Illumination.hex-to-color(t); }
+    }
+    if Illumination.mode == 2: VerticalLayout {
+        spacing: 8px;
+        HorizontalLayout {
+            Label { text: "SPECTRUM"; }
+            Rectangle { horizontal-stretch: 1; }
+            Button { text: "+"; enabled: Illumination.stops.length < 8; clicked => { Illumination.stops-add(1); } }
+            Rectangle { width: 4px; }
+            Button { text: "−"; enabled: Illumination.stops.length > 2; clicked => { Illumination.stops-add(-1); } }
+        }
+        HorizontalLayout {
+            spacing: 6px;
+            alignment: start;
+            for c[i] in Illumination.stops: Swatch {
+                width: 36px;
+                height: 28px;
+                value: c;
+                selected: Illumination.selected-stop == i;
+                clicked => { Illumination.stop-clicked(i); }
+            }
+        }
+        ColorPicker {
+            title: "SELECTED STOP";
+            value <=> Illumination.stop-color;
+            changed => { Illumination.stop-color-changed(); }
+            hex-entered(t) => { return Illumination.hex-to-color(t); }
+        }
+    }
+    if Illumination.directions.length > 0: VerticalLayout {
+        spacing: 6px;
+        Label { text: "DIRECTION"; }
+        ComboBox {
+            model: Illumination.directions;
+            current-index <=> Illumination.direction;
+            selected => { Illumination.changed(); }
+        }
+    }
+    SliderRow {
+        title: "BRIGHTNESS";
+        value <=> Illumination.brightness;
+        released => { Illumination.changed(); }
+    }
+    if Illumination.effect != 0: SliderRow {
+        title: "SPEED";
+        value <=> Illumination.speed;
+        released => { Illumination.changed(); }
+    }
+}
+
+// The Key Binding panel's state.
+export global KeyBinding {
+    in-out property <int> layer: 0;          // 0 remap, 1 Fn layer
+    in property <bool> has-key;              // a key is selected
+    in property <string> kicker;             // "KEY" / "FN LAYER"
+    in property <string> title;              // "Display key 7 (🌙 moon)"
+    in property <string> current;            // "Current: media Mute"
+    in-out property <int> kind: 0;           // index into the function list
+    in-out property <string> combo;
+    in-out property <int> media: 0;
+    in-out property <int> mouse: 0;
+    in-out property <int> scroll: 0;
+    in-out property <int> light: 0;
+    in-out property <int> host: 0;
+    in-out property <string> command;
+    in-out property <string> path;
+    in-out property <string> url;
+    in property <string> message;            // error or result of Apply
+    in-out property <bool> confirm-reset;
+    out property <[string]> kinds: ["Default (no remap)", "Keyboard key / shortcut", "Media",
+        "Mouse button", "Mouse scroll", "Lighting", "System shortcut", "Run Linux command",
+        "Open file", "Open folder", "Open website", "Disable key"];
+    out property <[string]> media-names: ["VolumeUp", "VolumeDown", "Mute", "MicMute",
+        "NextTrack", "PrevTrack", "PlayPause", "Stop"];
+    out property <[string]> mouse-names: ["Left", "Right", "Middle", "Forward", "Back"];
+    out property <[string]> scroll-names: ["ScrollUp", "ScrollDown", "ScrollLeft", "ScrollRight"];
+    out property <[string]> light-names: ["NextEffect", "PrevEffect", "BrightnessUp", "BrightnessDown"];
+    out property <[string]> host-names: ["FileExplorer", "Calculator", "TaskManager", "LockPC",
+        "ShutDownPC", "SleepPC", "HibernatePC", "SnippingTool", "Notepad", "Paint",
+        "AirplaneMode", "XboxGameBar", "SystemSettings", "Refresh", "TabbingApp", "CloseApp",
+        "Copy", "Paste", "Cut", "InternetBrowser", "EmailReader"];
+    callback layer-clicked(int);
+    callback apply();
+    callback reset-all();
+    callback browse();
+    callback choose-program();
+}
+
+component FunctionRow inherits Rectangle {
+    in property <string> text;
+    in property <bool> checked;
+    callback clicked;
+    height: 30px;
+    background: root.checked ? Theme.n600 : ta.has-hover ? #252629 : transparent;
+    HorizontalLayout {
+        padding-left: 10px;
+        Text {
+            text: root.text;
+            vertical-alignment: center;
+            color: root.checked ? Theme.accent : Theme.n100;
+            font-size: 12px;
+        }
+    }
+    ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
+component KeyBindingPanel inherits VerticalLayout {
+    padding: 16px;
+    spacing: 10px;
+    PageTitle { text: "KEY BINDING"; }
+    HorizontalLayout {
+        for name[i] in ["REMAP", "FN LAYER"]: Segment {
+            text: name;
+            checked: KeyBinding.layer == i;
+            clicked => { KeyBinding.layer-clicked(i); }
+        }
+    }
+    if !KeyBinding.has-key: VerticalLayout {
+        vertical-stretch: 1;
+        alignment: center;
+        spacing: 12px;
+        Image {
+            source: @image-url("icons/keybind.svg");
+            height: 56px;
+            colorize: Theme.accent;
+        }
+        Text {
+            text: "SELECT KEY\nTO SET UP A\nFUNCTION";
+            horizontal-alignment: center;
+            color: Theme.n0;
+            font-size: 22px;
+            font-weight: 800;
+        }
+    }
+    if KeyBinding.has-key: ScrollView {
+        vertical-stretch: 1;
+        VerticalLayout {
+            spacing: 8px;
+            alignment: start;
+            Text { text: KeyBinding.kicker; color: Theme.accent; font-size: 11px; }
+            Text { text: KeyBinding.title; color: Theme.n0; font-weight: 700; font-size: 15px; }
+            Muted { text: KeyBinding.current; wrap: word-wrap; }
+            Label { text: "ASSIGN FUNCTION"; }
+            VerticalLayout {
+                for k[i] in KeyBinding.kinds: FunctionRow {
+                    text: k;
+                    checked: KeyBinding.kind == i;
+                    clicked => { KeyBinding.kind = i; }
+                }
+            }
+            if KeyBinding.kind == 1: LineEdit {
+                text <=> KeyBinding.combo;
+                placeholder-text: "e.g.  Escape   F13   ctrl+shift+T   super+E";
+            }
+            if KeyBinding.kind == 2: ComboBox { model: KeyBinding.media-names; current-index <=> KeyBinding.media; }
+            if KeyBinding.kind == 3: ComboBox { model: KeyBinding.mouse-names; current-index <=> KeyBinding.mouse; }
+            if KeyBinding.kind == 4: ComboBox { model: KeyBinding.scroll-names; current-index <=> KeyBinding.scroll; }
+            if KeyBinding.kind == 5: ComboBox { model: KeyBinding.light-names; current-index <=> KeyBinding.light; }
+            if KeyBinding.kind == 6: VerticalLayout {
+                spacing: 6px;
+                ComboBox { model: KeyBinding.host-names; current-index <=> KeyBinding.host; }
+                Muted {
+                    text: "Sent by the keyboard itself as a Windows-style shortcut (Explorer = Win+E, Lock = Win+L, Task Manager = Ctrl+Shift+Esc…).";
+                    wrap: word-wrap;
+                }
+            }
+            if KeyBinding.kind == 7: VerticalLayout {
+                spacing: 6px;
+                HorizontalLayout {
+                    Button { text: "Choose a program…"; clicked => { KeyBinding.choose-program(); } }
+                    Rectangle { horizontal-stretch: 1; }
+                }
+                TextEdit { text <=> KeyBinding.command; height: 80px; }
+                Muted { text: "Shell command, e.g. konsole. Runs through the darkmount background service."; wrap: word-wrap; }
+            }
+            if KeyBinding.kind == 8 || KeyBinding.kind == 9: VerticalLayout {
+                spacing: 6px;
+                HorizontalLayout {
+                    spacing: 6px;
+                    LineEdit { text <=> KeyBinding.path; }
+                    Button { text: "…"; clicked => { KeyBinding.browse(); } }
+                }
+                Muted { text: "Opened by the darkmount background service."; wrap: word-wrap; }
+            }
+            if KeyBinding.kind == 10: VerticalLayout {
+                spacing: 6px;
+                LineEdit { text <=> KeyBinding.url; placeholder-text: "https://…"; }
+                Muted { text: "Opened by the darkmount background service."; wrap: word-wrap; }
+            }
+            if KeyBinding.message != "": Muted {
+                text: KeyBinding.message;
+                color: Theme.warn;
+                wrap: word-wrap;
+            }
+            HorizontalLayout {
+                alignment: end;
+                Button { text: "Apply"; primary: true; clicked => { KeyBinding.apply(); } }
+            }
+        }
+    }
+    HorizontalLayout {
+        Label { text: KeyBinding.confirm-reset ? "RESET ALL KEYS (BOTH LAYERS)?" : "RESET ALL KEYS TO DEFAULT"; vertical-alignment: center; }
+        Rectangle { horizontal-stretch: 1; }
+        if KeyBinding.confirm-reset: Button { text: "Cancel"; width: 80px; clicked => { KeyBinding.confirm-reset = false; } }
+        if KeyBinding.confirm-reset: Rectangle { width: 6px; }
+        Button {
+            text: KeyBinding.confirm-reset ? "Reset all" : "Reset";
+            primary: KeyBinding.confirm-reset;
+            width: 100px;
+            clicked => {
+                if (KeyBinding.confirm-reset) {
+                    KeyBinding.confirm-reset = false;
+                    KeyBinding.reset-all();
+                } else {
+                    KeyBinding.confirm-reset = true;
+                }
+            }
+        }
+    }
+}
+
+export global MediaDock {
+    in property <bool> attached: true;
+    in-out property <color> color: #dc4d00;
+    in-out property <bool> idle-on: true;
+    in-out property <int> idle-s: 30;
+    in-out property <int> view: 0;     // 0 image, 1 clock
+    in-out property <int> clock: 0;    // 0 12 h, 1 24 h
+    in-out property <bool> off-on;
+    in-out property <int> off-s: 60;
+    in property <string> clock-text: "—";
+    in-out property <bool> confirm-reset;
+    in property <image> dock-img;
+    in property <image> menu-mask;
+    in-out property <string> sel;
+    callback key-clicked(string);
+    callback changed();
+    callback sync();
+    callback reset();
+}
+
+export struct FirmwarePart { name: string, version: string }
+
+export global ProductSettings {
+    in property <[FirmwarePart]> firmware;
+    in property <string> update-text;
+    in property <bool> install-visible;
+    in property <bool> install-enabled;
+    in property <bool> checking;
+    in property <bool> installing;
+    in property <float> progress;
+    in-out property <bool> confirm-install;
+    in-out property <bool> game;
+    in-out property <[bool]> flags: [false, false, false, false, false];
+    in property <string> layout-text;
+    in property <string> info-text;
+    in-out property <bool> service;
+    in property <string> service-text;
+    in-out property <bool> autostart;
+    callback check-updates();
+    callback install();
+    callback game-toggled(bool);
+    callback flag-toggled(int, bool);
+    callback service-toggled(bool);
+    callback autostart-toggled(bool);
+}
+
+component Row inherits HorizontalLayout {
+    in property <string> text;
+    in property <bool> muted;
+    spacing: 8px;
+    Text { text: root.text; color: root.muted ? Theme.n300 : Theme.n100; font-size: 12px; vertical-alignment: center; }
+    Rectangle { horizontal-stretch: 1; }
+    @children
+}
+
+// The media dock render (IO Center's Media Dock view): the menu tile lit in the menu
+// color; the four keys can be clicked to change what they do. Coordinates are in the
+// 3248 × 3040 picture (dark_mount_media.json).
+component DockView inherits Rectangle {
+    // fit the visible part of the picture (2404 × 928 at 420, 1060)
+    property <float> s: min(self.width * 0.85 / 2404px, (self.height - 60px) * 0.85 / 928px);
+    property <length> ox: (self.width - 2404px * self.s) / 2 - 420px * self.s;
+    property <length> oy: (self.height - 928px * self.s) / 2 - 1060px * self.s;
+    Image { x: root.ox; y: root.oy; width: 3248px * root.s; height: 3040px * root.s; source: MediaDock.dock-img; }
+    Rectangle {
+        x: root.ox + (2083 - 6) * 1px * root.s; y: root.oy + (1173 - 6) * 1px * root.s;
+        width: (316 + 12) * 1px * root.s; height: (347 + 12) * 1px * root.s;
+        background: #282828;
+        Image {
+            x: 6px * root.s; y: 6px * root.s; width: 316px * root.s; height: 347px * root.s;
+            source: MediaDock.menu-mask; colorize: MediaDock.color;
+        }
+    }
+    for k in [{ id: "DockMute", x: 876, y: 1088 }, { id: "DockPlayPause", x: 1276, y: 1088 },
+              { id: "DockPrev", x: 876, y: 1792 }, { id: "DockNext", x: 1276, y: 1792 }]: Rectangle {
+        x: root.ox + k.x * 1px * root.s; y: root.oy + k.y * 1px * root.s;
+        width: 396px * root.s; height: 160px * root.s;
+        border-radius: 9px * root.s;
+        border-width: MediaDock.sel == k.id ? 3px : ta.has-hover ? 2px : 0px;
+        border-color: Theme.accent;
+        background: MediaDock.sel == k.id ? #ee7f0040 : ta.has-hover ? #ee7f0020 : transparent;
+        ta := TouchArea {
+            mouse-cursor: pointer;
+            clicked => { MediaDock.sel = k.id; MediaDock.key-clicked(k.id); }
+        }
+    }
+    Text {
+        x: 0; y: root.height - 34px; width: root.width;
+        horizontal-alignment: center;
+        text: "Click a media dock key to change what it does.";
+        color: Theme.n300; font-family: Theme.font; font-size: 13px;
+    }
+}
+
+component MediaDockPanel inherits VerticalLayout {
+    padding: 16px;
+    spacing: 12px;
+    alignment: start;
+    PageTitle { text: "MEDIA DOCK"; }
+    if !MediaDock.attached: Muted { text: "The media dock isn't attached."; }
+    if MediaDock.attached: VerticalLayout {
+        spacing: 12px;
+        ColorPicker {
+            title: "MENU COLOR";
+            value <=> MediaDock.color;
+            changed => { MediaDock.changed(); }
+            hex-entered(t) => { return Illumination.hex-to-color(t); }
+        }
+        Label { text: "IDLE GRAPHIC"; }
+        Row {
+            text: "Show idle screen after";
+            CheckBox { checked <=> MediaDock.idle-on; toggled => { MediaDock.changed(); } }
+            SpinBox { width: 110px; minimum: 5; maximum: 3600; enabled: MediaDock.idle-on;
+                      value <=> MediaDock.idle-s; edited => { MediaDock.changed(); } }
+            Text { text: "s"; color: Theme.n300; vertical-alignment: center; }
+        }
+        Row {
+            text: "VIEW";
+            HorizontalLayout {
+                width: 200px;
+                for n[i] in ["IMAGE", "CLOCK"]: Segment {
+                    text: n;
+                    checked: MediaDock.view == i;
+                    clicked => { MediaDock.view = i; MediaDock.changed(); }
+                }
+            }
+        }
+        Row {
+            text: "CLOCK TYPE";
+            HorizontalLayout {
+                width: 200px;
+                for n[i] in ["12H", "24H"]: Segment {
+                    text: n;
+                    checked: MediaDock.clock == i;
+                    clicked => { MediaDock.clock = i; MediaDock.changed(); }
+                }
+            }
+        }
+        Row {
+            text: "Turn off screen after";
+            CheckBox { checked <=> MediaDock.off-on; toggled => { MediaDock.changed(); } }
+            SpinBox { width: 110px; minimum: 5; maximum: 36000; enabled: MediaDock.off-on;
+                      value <=> MediaDock.off-s; edited => { MediaDock.changed(); } }
+            Text { text: "s"; color: Theme.n300; vertical-alignment: center; }
+        }
+        Row {
+            text: "CLOCK";
+            Muted { text: MediaDock.clock-text; vertical-alignment: center; }
+            Button { text: "Sync now"; clicked => { MediaDock.sync(); } }
+        }
+        Muted { text: "The dock clock also syncs by itself every 10 minutes and after the PC wakes up."; wrap: word-wrap; }
+        Row {
+            text: MediaDock.confirm-reset ? "RESET SCREEN SETTINGS?" : "RESET SCREEN SETTINGS";
+            if MediaDock.confirm-reset: Button { text: "Cancel"; clicked => { MediaDock.confirm-reset = false; } }
+            Button {
+                text: MediaDock.confirm-reset ? "Reset" : "Reset…";
+                primary: MediaDock.confirm-reset;
+                clicked => {
+                    if (MediaDock.confirm-reset) { MediaDock.confirm-reset = false; MediaDock.reset(); }
+                    else { MediaDock.confirm-reset = true; }
+                }
+            }
+        }
+    }
+}
+
+component SettingsPanel inherits VerticalLayout {
+    padding: 16px;
+    spacing: 10px;
+    alignment: start;
+    PageTitle { text: "PRODUCT SETTINGS"; }
+    Row {
+        text: "FIRMWARE VERSION";
+        Button { text: ProductSettings.checking ? "Checking…" : "Check for updates"; primary: true;
+                 enabled: !ProductSettings.checking; clicked => { ProductSettings.check-updates(); } }
+    }
+    for f in ProductSettings.firmware: HorizontalLayout {
+        spacing: 8px;
+        Label { text: f.name; width: 120px; }
+        Muted { text: "v " + f.version; }
+    }
+    HorizontalLayout {
+        spacing: 8px;
+        Muted { text: ProductSettings.update-text; wrap: word-wrap; horizontal-stretch: 1; }
+        if ProductSettings.install-visible && !ProductSettings.installing: Button {
+            text: ProductSettings.confirm-install ? "Start update" : "Install…";
+            primary: true;
+            enabled: ProductSettings.install-enabled;
+            clicked => {
+                if (ProductSettings.confirm-install) {
+                    ProductSettings.confirm-install = false;
+                    ProductSettings.install();
+                } else {
+                    ProductSettings.confirm-install = true;
+                }
+            }
+        }
+    }
+    if ProductSettings.confirm-install: Muted {
+        text: "The update takes a few minutes. Don't unplug the keyboard or let the PC sleep. Your settings are backed up first and restored afterwards.";
+        color: Theme.warn;
+        wrap: word-wrap;
+    }
+    if ProductSettings.installing: Rectangle {
+        height: 6px;
+        background: Theme.n600;
+        Rectangle {
+            x: 0px;
+            width: parent.width * ProductSettings.progress / 100;
+            background: Theme.accent;
+        }
+    }
+    Rectangle { height: 6px; }
+    Row {
+        text: "GAME MODE";
+        Toggle { checked <=> ProductSettings.game; toggled(on) => { ProductSettings.game-toggled(on); } }
+    }
+    Muted { text: "Also toggled on the keyboard with Fn + Pause."; font-size: 11px; }
+    for t[i] in ["Disable SHIFT + TAB", "Disable ALT + F4", "Disable Windows Key", "Disable ALT + TAB", "Disable CAPS LOCK"]: Row {
+        text: t;
+        muted: true;
+        Toggle {
+            checked: ProductSettings.flags[i];
+            toggled(on) => { ProductSettings.flag-toggled(i, on); }
+        }
+    }
+    Rectangle { height: 6px; }
+    Row { text: "LAYOUT"; Muted { text: ProductSettings.layout-text; vertical-alignment: center; } }
+    Muted { text: ProductSettings.info-text; wrap: word-wrap; }
+    Rectangle { height: 6px; }
+    Row {
+        text: "LINUX HELPER SERVICE";
+        Toggle { checked <=> ProductSettings.service; toggled(on) => { ProductSettings.service-toggled(on); } }
+    }
+    Muted {
+        text: "Runs key actions and syncs the dock clock while this app isn't running (it steps aside while the app is). " + ProductSettings.service-text;
+        wrap: word-wrap;
+    }
+    Rectangle { height: 6px; }
+    Row {
+        text: "START IN TRAY AT LOGIN";
+        Toggle { checked <=> ProductSettings.autostart; toggled(on) => { ProductSettings.autostart-toggled(on); } }
+    }
+}
+
+export component DarkMountPage inherits Rectangle {
+    in property <string> device-name: "be quiet! Dark Mount";
+    in property <string> status;
+    in property <bool> connected;
+    in-out property <int> panel: 0;   // 0 Illumination, 1 Key Binding, 2 Media Dock, 3 Product Settings
+    in property <[PartVisual]> parts;
+    in property <[KeyVisual]> keys;
+    in property <[MaskVisual]> masks;
+    in property <float> bx;
+    in property <float> by;
+    in property <float> bw: 1;
+    in property <float> bh: 1;
+    callback key-clicked(string);
+    callback panel-changed(int);
+    background: Theme.n800;
+
+    VerticalLayout {
+        // device bar
+        Rectangle {
+            height: 65px;
+            background: Theme.n700;
+            HorizontalLayout {
+                padding-left: 18px;
+                spacing: 12px;
+                VerticalLayout {
+                    alignment: center;
+                    Text { text: root.device-name; color: Theme.n0; font-weight: 700; font-size: 15px; }
+                    Muted { text: root.status; }
+                }
+                Rectangle { horizontal-stretch: 1; }
+                for t[i] in [
+                    { text: "Illumination", icon: @image-url("icons/bulb.svg") },
+                    { text: "Key Binding", icon: @image-url("icons/keybind.svg") },
+                    { text: "Media Dock", icon: @image-url("icons/media.svg") },
+                    { text: "Product Settings", icon: @image-url("icons/wrench.svg") },
+                ]: Tile {
+                    width: 110px;
+                    height: 65px;
+                    icon: t.icon;
+                    text: t.text;
+                    checked: root.panel == i;
+                    clicked => {
+                        root.panel = i;
+                        root.panel-changed(i);
+                    }
+                }
+            }
+        }
+        HorizontalLayout {
+            vertical-stretch: 1;
+            // left panel
+            Rectangle {
+                width: 381px;
+                background: Theme.panel;
+                if !root.connected: VerticalLayout {
+                    padding: 16px;
+                    alignment: start;
+                    Muted { text: root.status; wrap: word-wrap; }
+                }
+                if root.connected && root.panel == 0: IlluminationPanel { }
+                if root.connected && root.panel == 1: KeyBindingPanel { }
+                if root.connected && root.panel == 2: ScrollView {
+                    VerticalLayout {
+                        alignment: start;
+                        MediaDockPanel { }
+                        if KeyBinding.has-key && MediaDock.sel != "": KeyBindingPanel { }
+                    }
+                }
+                if root.connected && root.panel == 3: ScrollView { SettingsPanel { } }
+            }
+            // stage: the keyboard
+            Rectangle {
+                horizontal-stretch: 1;
+                background: Theme.stage;
+                if root.panel == 2: DockView { }
+                if root.panel != 2: KeyboardView {
+                    parts: root.parts;
+                    keys: root.keys;
+                    masks: root.masks;
+                    bx: root.bx;
+                    by: root.by;
+                    bw: root.bw;
+                    bh: root.bh;
+                    key-mode: root.panel == 1;
+                    key-clicked(name) => { root.key-clicked(name); }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=darkmount-linux
+GenericName=Keyboard Settings
+Comment=Unofficial offline settings app for the be quiet! Dark Mount keyboard
+Exec=darkmount-linux
+Icon=darkmount-linux
+Categories=Settings;HardwareSettings;
+Keywords=keyboard;rgb;lighting;dark mount;be quiet;
+StartupWMClass=darkmount-linux
