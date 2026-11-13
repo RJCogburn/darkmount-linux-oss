@@ -1,6 +1,6 @@
 # Maintainer: RJCogburn <28759507+RJCogburn@users.noreply.github.com>
 pkgname=darkmount-linux
-pkgver=0.2.0
+pkgver=0.2.1
 pkgrel=1
 pkgdesc="Unofficial offline app and CLI for the be quiet! Dark Mount keyboard (lighting, key remapping, media dock, firmware updates)"
 arch=('x86_64')
@@ -15,7 +15,7 @@ optdepends=('polkit: install the udev rule from the app'
             'zenity: file and folder pickers elsewhere')
 options=('!lto')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('4e2ee908ad0c0b87395e6c87b23f76a5d1029a99294fbea2aba8ec67bdc8673a')
+sha256sums=('8e1124c6ce4c7450de38cddf64e3071919d45838b0f5e78618fb000b5ff45a90')
 
 prepare() {
   cd "darkmount-linux-oss-$pkgver"

@@ -1,6 +1,6 @@
 pkgbase = darkmount-linux
 	pkgdesc = Unofficial offline app and CLI for the be quiet! Dark Mount keyboard (lighting, key remapping, media dock, firmware updates)
-	pkgver = 0.2.0
+	pkgver = 0.2.1
 	pkgrel = 1
 	url = https://github.com/RJCogburn/darkmount-linux-oss
 	arch = x86_64
@@ -24,7 +24,7 @@ pkgbase = darkmount-linux
 	optdepends = kdialog: file and folder pickers on KDE
 	optdepends = zenity: file and folder pickers elsewhere
 	options = !lto
-	source = darkmount-linux-0.2.0.tar.gz::https://github.com/RJCogburn/darkmount-linux-oss/archive/refs/tags/v0.2.0.tar.gz
-	sha256sums = 4e2ee908ad0c0b87395e6c87b23f76a5d1029a99294fbea2aba8ec67bdc8673a
+	source = darkmount-linux-0.2.1.tar.gz::https://github.com/RJCogburn/darkmount-linux-oss/archive/refs/tags/v0.2.1.tar.gz
+	sha256sums = 8e1124c6ce4c7450de38cddf64e3071919d45838b0f5e78618fb000b5ff45a90
 
 pkgname = darkmount-linux
