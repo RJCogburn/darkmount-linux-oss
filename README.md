@@ -50,6 +50,9 @@ chmod +x darkmount-linux-x86_64.AppImage
 ln -s "$PWD/darkmount-linux-x86_64.AppImage" ~/.local/bin/darkmount   # then just `darkmount …`
 ```
 
+**Arch Linux (AUR):** `darkmount-linux` (e.g. `yay -S darkmount-linux`). The package
+installs the udev rule too. Its `PKGBUILD` is in `packaging/aur/`.
+
 **From source** (Rust 1.88 or newer):
 
 ```bash

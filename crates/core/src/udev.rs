@@ -7,8 +7,9 @@ use std::process::{Command, Stdio};
 pub const RULE_PATH: &str = "/etc/udev/rules.d/70-bequiet-darkmount.rules";
 pub const RULE: &str = include_str!("../../../70-bequiet-darkmount.rules");
 
+/// Is the rule there (installed by the app, or by a distro package)?
 pub fn installed() -> bool {
-    Path::new(RULE_PATH).exists()
+    [RULE_PATH, "/usr/lib/udev/rules.d/70-bequiet-darkmount.rules"].iter().any(|p| Path::new(p).exists())
 }
 
 /// Install the rule and re-apply it to plugged-in devices (asks for the password

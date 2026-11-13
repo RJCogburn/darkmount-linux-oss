@@ -1,0 +1,49 @@
+# Maintainer: RJCogburn <28759507+RJCogburn@users.noreply.github.com>
+pkgname=darkmount-linux
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Unofficial offline app and CLI for the be quiet! Dark Mount keyboard (lighting, key remapping, media dock, firmware updates)"
+arch=('x86_64')
+url="https://github.com/RJCogburn/darkmount-linux-oss"
+license=('MIT' 'OFL-1.1')
+depends=('gcc-libs' 'glibc' 'fontconfig' 'freetype2' 'libglvnd' 'wayland' 'libxkbcommon'
+         'libxkbcommon-x11' 'libx11' 'libxcursor' 'libxi' 'libxrender')
+makedepends=('cargo')
+optdepends=('polkit: install the udev rule from the app'
+            'libnotify: tray notifications'
+            'kdialog: file and folder pickers on KDE'
+            'zenity: file and folder pickers elsewhere')
+options=('!lto')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('4e2ee908ad0c0b87395e6c87b23f76a5d1029a99294fbea2aba8ec67bdc8673a')
+
+prepare() {
+  cd "darkmount-linux-oss-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  cd "darkmount-linux-oss-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  export CARGO_TARGET_DIR=target
+  cargo build --frozen --release
+}
+
+check() {
+  cd "darkmount-linux-oss-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  cargo test --frozen --release
+}
+
+package() {
+  cd "darkmount-linux-oss-$pkgver"
+  install -Dm755 target/release/darkmount-linux "$pkgdir/usr/bin/darkmount-linux"
+  install -Dm755 target/release/darkmount "$pkgdir/usr/bin/darkmount"
+  install -d "$pkgdir/usr/share/darkmount-linux"
+  cp -r assets "$pkgdir/usr/share/darkmount-linux/"
+  install -Dm644 packaging/darkmount-linux.desktop "$pkgdir/usr/share/applications/darkmount-linux.desktop"
+  install -Dm644 packaging/darkmount-linux.png "$pkgdir/usr/share/icons/hicolor/256x256/apps/darkmount-linux.png"
+  install -Dm644 70-bequiet-darkmount.rules "$pkgdir/usr/lib/udev/rules.d/70-bequiet-darkmount.rules"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
