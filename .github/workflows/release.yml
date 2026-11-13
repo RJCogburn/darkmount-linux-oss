@@ -1,5 +1,6 @@
-# Build every download on an old distribution (Debian 11, glibc 2.31) so the programs
-# run on Ubuntu 20.04+, Debian 11+, Fedora 32+, openSUSE Leap 15.3+ and newer; check
+# Build every download on an old, still-supported distribution (AlmaLinux 8, glibc
+# 2.28) so the programs run on Ubuntu 20.04+, Debian 10+, Fedora 29+, RHEL/Alma/Rocky
+# 8+, openSUSE Leap 15 and newer; check
 # that each package installs and starts on several distributions; on a version tag,
 # attach everything to the GitHub release.
 name: release
@@ -14,18 +15,17 @@ permissions:
 
 env:
   NFPM_VERSION: "2.49.0"
-  MAX_GLIBC: "2.31"
+  MAX_GLIBC: "2.28"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: debian:bullseye
+    container: almalinux:8
     steps:
       - name: Build tools
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends build-essential pkg-config curl ca-certificates \
-            git rsync file libfontconfig1-dev libfreetype6-dev
+          dnf install -y gcc gcc-c++ make pkgconf-pkg-config fontconfig-devel freetype-devel \
+            git rsync file binutils which tar gzip
           curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
           curl -sSL "https://github.com/goreleaser/nfpm/releases/download/v${NFPM_VERSION}/nfpm_${NFPM_VERSION}_Linux_x86_64.tar.gz" \
             | tar -xz -C /usr/local/bin nfpm
