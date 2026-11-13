@@ -41,27 +41,42 @@ The desktop app can also install this rule for you (it asks for your password).
 | Media Dock | menu colour, idle screen (image/clock), 12/24 h clock, screen-off timer, clock sync. Click one of the dock's four keys to rebind it |
 | Product Settings | firmware versions and updates, game mode and blocked keys, layout, helper service on/off, start in tray at login |
 
-**AppImage** (from [Releases](https://github.com/RJCogburn/darkmount-linux-oss/releases)):
+### Install
+
+Downloads are on the [Releases](https://github.com/RJCogburn/darkmount-linux-oss/releases)
+page. They're built on an older system (glibc 2.28), so they run on Ubuntu 20.04+,
+Debian 10+, Linux Mint 20+, Fedora 29+, RHEL/AlmaLinux/Rocky 8+, openSUSE Leap 15 /
+Tumbleweed, Arch and others of that age or newer (x86_64).
+
+| Your system | Get | Install |
+|---|---|---|
+| Debian, Ubuntu, Mint, Pop!_OS | `darkmount-linux_<version>-1_amd64.deb` | `sudo apt install ./darkmount-linux_*.deb` |
+| Fedora, openSUSE, RHEL-like | `darkmount-linux-<version>-1.x86_64.rpm` | `sudo dnf install ./darkmount-linux-*.rpm` or `sudo zypper install ./darkmount-linux-*.rpm` |
+| Arch, Manjaro, EndeavourOS | AUR: `darkmount-linux` | `yay -S darkmount-linux` (`PKGBUILD` in `packaging/aur/`) |
+| Any distribution, no install | `darkmount-linux-x86_64.AppImage` | `chmod +x` it and run it |
+| Any distribution, installed | `darkmount-linux-<version>-x86_64.tar.gz` | unpack, then `./install.sh` (for your user) or `./install.sh --system` |
+
+The .deb, .rpm and AUR packages install the udev rule; the `.tar.gz` installer asks
+for your password to install it. With the AppImage, use **Grant access** in the app
+the first time.
+
+AppImage tips:
 
 ```bash
-chmod +x darkmount-linux-x86_64.AppImage
-./darkmount-linux-x86_64.AppImage                    # desktop app
 ./darkmount-linux-x86_64.AppImage darkmount info     # the `darkmount` command (also: --cli info)
 ln -s "$PWD/darkmount-linux-x86_64.AppImage" ~/.local/bin/darkmount   # then just `darkmount …`
 ```
 
-**Arch Linux (AUR):** `darkmount-linux` (e.g. `yay -S darkmount-linux`). The package
-installs the udev rule too. Its `PKGBUILD` is in `packaging/aur/`.
-
-**From source** (Rust 1.88 or newer):
+**From source** (Rust 1.88 or newer; on Debian/Ubuntu also `libfontconfig1-dev`):
 
 ```bash
 cargo build --release                # target/release/darkmount-linux and target/release/darkmount
 ./target/release/darkmount-linux     # finds assets/ in the source tree
 packaging/build-appimage.sh          # -> dist/darkmount-linux-x86_64.AppImage
+packaging/build-packages.sh          # -> dist/*.tar.gz, and .deb/.rpm when nfpm is installed
 ```
 
-For a system install, put the two programs in `/usr/bin` and `assets/` in
+For a system install by hand, put the two programs in `/usr/bin` and `assets/` in
 `/usr/share/darkmount-linux/assets` (`$DARKMOUNT_ASSETS` overrides the location).
 
 **System tray:** closing the window keeps the app in the tray. Its menu has backlight
