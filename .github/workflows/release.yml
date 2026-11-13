@@ -1,0 +1,126 @@
+# Build every download on an old distribution (Debian 11, glibc 2.31) so the programs
+# run on Ubuntu 20.04+, Debian 11+, Fedora 32+, openSUSE Leap 15.3+ and newer; check
+# that each package installs and starts on several distributions; on a version tag,
+# attach everything to the GitHub release.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  NFPM_VERSION: "2.49.0"
+  MAX_GLIBC: "2.31"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: debian:bullseye
+    steps:
+      - name: Build tools
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential pkg-config curl ca-certificates \
+            git rsync file libfontconfig1-dev libfreetype6-dev
+          curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+          curl -sSL "https://github.com/goreleaser/nfpm/releases/download/v${NFPM_VERSION}/nfpm_${NFPM_VERSION}_Linux_x86_64.tar.gz" \
+            | tar -xz -C /usr/local/bin nfpm
+      - uses: actions/checkout@v4
+      - name: Test
+        run: . "$HOME/.cargo/env" && cargo test --release --locked
+      - name: AppImage
+        run: . "$HOME/.cargo/env" && packaging/build-appimage.sh
+      - name: .tar.gz, .deb, .rpm
+        run: . "$HOME/.cargo/env" && packaging/build-packages.sh
+      - name: Check the glibc the programs need
+        run: |
+          for b in target/release/darkmount-linux target/release/darkmount; do
+            need=$(objdump -T "$b" | grep -oE 'GLIBC_[0-9.]+' | sed 's/GLIBC_//' | sort -V | tail -1)
+            echo "$b needs glibc $need"
+            [ "$(printf '%s\n%s\n' "$need" "$MAX_GLIBC" | sort -V | tail -1)" = "$MAX_GLIBC" ]
+          done
+      - name: Checksums
+        run: cd dist && sha256sum darkmount-linux* | grep -v '\.sha256' > SHA256SUMS && cat SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            dist/*.AppImage
+            dist/*.deb
+            dist/*.rpm
+            dist/*.tar.gz
+            dist/SHA256SUMS
+
+  install-test:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { image: "ubuntu:20.04", kind: tar }
+          - { image: "ubuntu:22.04", kind: deb }
+          - { image: "ubuntu:24.04", kind: deb }
+          - { image: "debian:12", kind: deb }
+          - { image: "fedora:latest", kind: rpm }
+          - { image: "opensuse/leap:15.6", kind: rpm }
+          - { image: "opensuse/tumbleweed", kind: rpm }
+          - { image: "ubuntu:20.04", kind: appimage }
+    container: ${{ matrix.image }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - name: Install (${{ matrix.kind }})
+        run: |
+          set -e
+          case "${{ matrix.kind }}" in
+            deb)  apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y ./darkmount-linux_*.deb ;;
+            rpm)  if command -v dnf >/dev/null; then dnf install -y ./darkmount-linux-*.rpm
+                  else zypper --non-interactive install --allow-unsigned-rpm ./darkmount-linux-*.rpm; fi ;;
+            tar)  apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y libfontconfig1 libfreetype6
+                  tar -xzf darkmount-linux-*.tar.gz && mkdir -p /usr/local/bin
+                  # as root, the installer installs to /usr/local without sudo
+                  HOME=/root sh darkmount-linux-*/install.sh --system || true
+                  ls -la /usr/local/bin ;;
+            appimage) apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y libfontconfig1 libfreetype6
+                  chmod +x darkmount-linux-x86_64.AppImage ;;
+          esac
+      - name: Programs start and find their libraries
+        run: |
+          set -e
+          if [ "${{ matrix.kind }}" = appimage ]; then
+            export APPIMAGE_EXTRACT_AND_RUN=1
+            ./darkmount-linux-x86_64.AppImage --cli --help | head -3
+            ./darkmount-linux-x86_64.AppImage --cli list || true
+            exit 0
+          fi
+          PATH="/usr/local/bin:$PATH"
+          darkmount --help | head -3
+          darkmount list || true   # no keyboard here: should say so, not crash
+          ldd "$(command -v darkmount-linux)" | tee /tmp/ldd
+          ! grep 'not found' /tmp/ldd
+          d=$(dirname "$(command -v darkmount-linux)")/../share/darkmount-linux/assets/dark_mount
+          test -f "$d/dark_mount_main_ansi.json" && echo "assets OK: $d"
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: install-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$tag" -R "$GITHUB_REPOSITORY" --title "darkmount-linux $tag" --notes "See the README for install instructions."
+          gh release upload "$tag" -R "$GITHUB_REPOSITORY" --clobber dist/*

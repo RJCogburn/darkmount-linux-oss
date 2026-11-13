@@ -1,0 +1,79 @@
+# .deb and .rpm packages (nfpm). Built by .github/workflows/release.yml after
+# `cargo build --release`; run from the repository root:
+#   VERSION=0.2.1 nfpm package -f packaging/nfpm.yaml -p deb -t dist/
+name: darkmount-linux
+arch: amd64
+platform: linux
+version: ${VERSION}
+version_schema: semver
+release: 1
+section: utils
+priority: optional
+maintainer: RJCogburn <28759507+RJCogburn@users.noreply.github.com>
+description: |
+  Unofficial offline app and CLI for the be quiet! Dark Mount keyboard.
+  Lighting with a live preview, key remapping (Fn layer, numpad display keys,
+  media dock keys), media dock settings, game mode and firmware updates.
+  Talks to the keyboard directly over hidraw. Not affiliated with be quiet!.
+vendor: RJCogburn
+homepage: https://github.com/RJCogburn/darkmount-linux-oss
+license: MIT
+
+contents:
+  - src: target/release/darkmount-linux
+    dst: /usr/bin/darkmount-linux
+    file_info: { mode: 0755 }
+  - src: target/release/darkmount
+    dst: /usr/bin/darkmount
+    file_info: { mode: 0755 }
+  - src: assets/
+    dst: /usr/share/darkmount-linux/assets
+  - src: packaging/darkmount-linux.desktop
+    dst: /usr/share/applications/darkmount-linux.desktop
+  - src: packaging/darkmount-linux.png
+    dst: /usr/share/icons/hicolor/256x256/apps/darkmount-linux.png
+  - src: 70-bequiet-darkmount.rules
+    dst: /usr/lib/udev/rules.d/70-bequiet-darkmount.rules
+  - src: LICENSE
+    dst: /usr/share/doc/darkmount-linux/LICENSE
+
+scripts:
+  postinstall: packaging/postinstall.sh
+
+overrides:
+  deb:
+    depends:
+      - libc6 (>= 2.31)
+      - libgcc-s1
+      - libfontconfig1
+      - libfreetype6
+      - libegl1
+      - libgl1
+      - libwayland-client0
+      - libwayland-egl1
+      - libxkbcommon0
+      - libxkbcommon-x11-0
+      - libx11-6
+      - libx11-xcb1
+      - libxcursor1
+      - libxi6
+      - libxrender1
+    recommends:
+      - pkexec | policykit-1
+      - libnotify-bin
+  rpm:
+    # library names rather than package names: Fedora and openSUSE name them differently
+    depends:
+      - libfontconfig.so.1()(64bit)
+      - libfreetype.so.6()(64bit)
+      - libEGL.so.1()(64bit)
+      - libGL.so.1()(64bit)
+      - libwayland-client.so.0()(64bit)
+      - libwayland-egl.so.1()(64bit)
+      - libxkbcommon.so.0()(64bit)
+      - libxkbcommon-x11.so.0()(64bit)
+      - libX11.so.6()(64bit)
+      - libX11-xcb.so.1()(64bit)
+      - libXcursor.so.1()(64bit)
+      - libXi.so.6()(64bit)
+      - libXrender.so.1()(64bit)
